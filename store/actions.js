@@ -154,6 +154,14 @@ const actions = {
       });
     })
   },
+  INITIALIZE_SEARCH_RESULT: function ({ commit }, search_results) {
+    return new Promise((resolve, reject) => {
+      commit(types.SET_SEARCH_RESULTS, {
+        search_results: search_results
+      })
+      resolve(search_results);
+    })
+  },
 }
 
 export default actions

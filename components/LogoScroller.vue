@@ -1,8 +1,10 @@
 <template>
-  <div v-if="featuredStores && featuredStores.length > 0" class="feature_logo_container">
+  <div v-if="featuredStores && featuredStores.length > 0" class="featured_logo_row">
     <slick ref="slick" :options="logoOptions">
       <div v-for="(item, index) in featuredStores" :key="index">
-        <img class="max-width" :src="item.image_url" :alt="item.name + ' Logo'" />
+        <div class="featured_logo_container">
+          <img class="max-width" :src="item.image_url" :alt="item.name + ' Logo'" />
+        </div>
       </div>
     </slick>
   </div>
@@ -45,15 +47,14 @@
       ]),
       featuredStores() {
         var stores = this.processedStores;
-        // console.log("stores", stores)
         var featured_stores = [];
         _.forEach(stores, function(value, key) {
-          // if (store is featured) {
+          if (value.is_featured_store) {
             if (!_.includes(value.store_front_url_abs, "missing")){
               featured_stores.push(value);
             }
-          // }
-        })
+          }
+        });
         return featured_stores;
       }
 		}

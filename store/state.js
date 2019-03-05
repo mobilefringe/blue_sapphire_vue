@@ -23,7 +23,8 @@ const state = {
   repos: null,
   results: [],
   route: null,
-  stores: []
+  stores: [],
+  search_results: []
 }
 
 export default state

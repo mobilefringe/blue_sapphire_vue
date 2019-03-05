@@ -327,6 +327,10 @@ const getters = {
       return o.is_coming_soon_store == true;
     });
     return coming_soon
+  },
+  searchResults: (state) => {
+    let search_results = state.search_results;
+    return search_results;
   }
 }
 

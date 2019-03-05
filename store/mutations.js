@@ -65,6 +65,9 @@ const mutations = {
   },
   [types.SET_STORES] (state, {stores}) {
     state.stores = stores;
+  },
+  [types.SET_SEARCH_RESULTS](state, { search_results }) {
+    state.search_results = search_results;
   }
 }
 

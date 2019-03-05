@@ -7,8 +7,8 @@
           <h3 class="promo_details_name">{{ currentPromo.name }}</h3>
           <h5 v-if="isMultiDay(currentPromo, timezone)" class="promo_dates">{{ currentPromo.start_date | moment("MMMM D", timezone) }} - {{ currentPromo.end_date | moment("MMMM D", timezone) }}</h5>
           <h5 v-else class="promo_dates">{{ currentPromo.start_date | moment("MMMM D", timezone) }}</h5>
-          <img class="promo_details_img" :src="currentPromo.image_url" :alt="currentPromo.name" />
           <hr class="horizontal_div">
+          <img class="promo_details_img" :src="currentPromo.image_url" :alt="currentPromo.name" />
           <p class="promo_details_desc" v-html="currentPromo.rich_description"></p>
         </div>
       </div>
@@ -83,17 +83,17 @@
       ...mapGetters([
         'property',
         'timezone',
-        'processedPromos',
         'findPromoBySlug'
       ])
     },
     methods: {
       updateCurrentPromo(slug) {
+        console.log("slug", slug)
+        var slug = slug
         this.currentPromo = this.findPromoBySlug(slug);
-        if (this.currentPromo === null || this.currentPromo === undefined){
-          this.$router.replace({ name: 'promotions'});
-        } else {
-          if (this.currentPromo.store) {
+        console.log("currentPromo", this.currentPromo)
+        if (this.currentPromo != null || this.currentPromo != undefined){
+          if (this.currentPromo.store != null || this.currentPromo.store != undefined) {
             this.page_name = this.currentPromo.store.name;
           } else {
             this.page_name = this.property.name;
@@ -104,6 +104,8 @@
           } else {
             this.currentPromo.image_url = this.currentPromo.promo_image_url_abs;
           }
+        } else {
+          this.$router.replace({ name: 'promotions'});
         }
       }
     }

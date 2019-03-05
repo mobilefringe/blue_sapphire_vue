@@ -7,7 +7,6 @@
             <today-hours></today-hours>
           </div>
           <div class="social_container">
-            
             <div class="site_search">
               <search-component :list="searchList" placeholder="Search" :suggestion-attribute="suggestionAttribute" :keys="keys" v-model="search_result" @select="onOptionSelect" :autocomplete="false" :tokenize="true" :minMatchCharLength="3" class="">
                 <template slot="item" scope="option" class="manual">
@@ -17,20 +16,12 @@
                 </template>
               </search-component>
             </div>
-            <div>
+            <div class="social_icons">
               <span v-for="(item, index) in social_media" :key="index">
                 <a :href="item.url" target="_blank"><i :class="item.iconClass" aria-hidden="true"></i><p class="accessibility">{{ item.name }}</p></a>
               </span>
             </div>
           </div>
-              
-          <div id="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-           
         </div>
       </div>
       <div class="nav_header">
@@ -39,7 +30,13 @@
             <a href="/">
               <img class="logo" src="//codecloud.cdn.speedyrails.net/sites/5aa1884a6e6f64062b310000/image/png/1517341893000/logo.png"/>
             </a>
-          </div>   
+          </div>  
+          <div id="menu-icon" @click="showMenu = !showMenu" :class="{ open: showMenu }" class="visible_phone hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> 
           <nav id="primary_nav" class="hidden_phone">
 						<ul>
               <li class="menu_item" v-for="(item, index) in menu_items" :key="index">
@@ -53,6 +50,55 @@
               </li>
 						</ul>
 					</nav>
+				</div>
+        <div class="nav_container show_phone">
+          <transition name="custom-classes-transition" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+            <nav id="mobile_nav" v-show="showMenu" class="">
+              <ul>
+                <li v-for="(item, index) in menu_items" :key="index" class="menu_item">
+                  <router-link :to="item.href" v-if="item.sub_menu == undefined">{{ item.name }}</router-link>
+                  <div v-else>
+                    <b-card no-body class="mb-1">
+                      <b-card-header header-tag="header" class="p-1" role="tab">
+                        <b-btn block @click="item.show_sub_menu = !item.show_sub_menu" :class="item.show_sub_menu ? 'collapsed' : null" :aria-controls="item.name" :aria-expanded="item.show_sub_menu ? 'true' : 'false'">
+                          {{ item.name }}
+                          <i v-if="item.show_sub_menu"  class="fa fa-minus"></i>
+                          <i v-else  class="fa fa-plus"></i>
+                        </b-btn>
+                      </b-card-header>
+                      <b-collapse v-model="item.show_sub_menu" :id="item.name" :visible="item.show_sub_menu" :accordion="item.name" role="tabpanel" class="accordion_body">
+                        <b-card-body v-for="(sub_menu, index) in item.sub_menu" :key="index">
+                          <p class="card-text" @click="showMenu = !showMenu">
+                            <router-link :to="sub_menu.href">{{ sub_menu.name }}</router-link>
+                          </p>
+                        </b-card-body>
+                      </b-collapse>
+                    </b-card>
+                  </div>
+                </li>
+              </ul>
+						    <!-- <div class="mobile_nav_content visible_phone">
+                                <div class="mobile_address_container center">
+                                    <hr>
+                                    <a href="https://goo.gl/maps/RJ5dV8dxP1y" target="_blank">
+                                        <p class="property_address">{{ property.address1 }},<br>{{ property.city }}, {{ property.province_state }}</p>
+                                    </a>
+                                    <a :href="'tel:' + property.contact_phone" >
+                                        <h5>{{ property.contact_phone }}</h5>
+                                    </a>
+                                    <hr>
+                                </div>
+                                <div class="social_icons center">
+                                    <span v-for="item in social_media">
+                                        <a :href="item.url" target="_blank">
+                                            <p class="accessibility">{{ item.name }}</p>
+                                            <i :class="item.iconClass" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                </div>  -->
+							<!-- </div> -->
+						</nav>
+          </transition>
         </div>
       </div>
     </div>
@@ -130,11 +176,12 @@
 				'property',
         'route',
         'processedEvents',
-        'processedPromos'
+        'processedPromos',
+        'processedJobs',
+        'processedStores'
 			]),
       searchList() {
         var events = this.processedEvents;
-        console.log("events", events)
         _.forEach(events, function(value, key) {
           if (_.includes(value.eventable_type, "Property")) {
             value.is_store = false;
@@ -143,7 +190,6 @@
           }
         });
         var promos = this.processedPromos;
-        console.log("promos", promos)
         _.forEach(promos, function(value, key) {
           if (_.includes(value.promotionable_type, "Property")) {
             value.is_store = false;
@@ -209,22 +255,16 @@
       },
       onOptionSelect(option) {
         var search_results = option;
+        // Change VUEX search result to latest result
+        Promise.all([
+          this.$store.dispatch("INITIALIZE_SEARCH_RESULT", search_results)
+        ]);
+        this.$router.push({ name: "search-results", query: { searchQuery: this.search_result }});
 
-        // change vuex search result to latest result
-        // Promise.all([
-        //   this.$store.dispatch("INITIALIZE_SEARCH_RESULT", search_results)
-        // ]);
-        // this.$router.push(
-        //   this.localePath({
-        //     name: "search-results",
-        //     //   params: { searchResults: this.searchResultList },
-        //     query: { searchQuery: this.search_result }
-        //   })
-        // );
-        // this.$nextTick(function() {
-        //   this.search_result = "";
-        // });
-      },
+        this.$nextTick(function() {
+          this.search_result = "";
+        });
+      }
 		},
 		beforeMount () {
 			window.addEventListener('resize', this.getWindowWidth);

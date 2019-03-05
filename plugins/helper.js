@@ -5,7 +5,6 @@ import tz from 'moment-timezone';
 Vue.mixin({
   methods: {
     isMultiDay(value, timezone) {
-      console.log("value", value)
       var item = value;
       var start_date = moment(item.start_date).tz(timezone).format('MM-DD-YYYY');
       var end_date = moment(item.end_date).tz(timezone).format('MM-DD-YYYY');
@@ -27,6 +26,14 @@ Vue.mixin({
     truncate(val_body, length) {
       var truncate = _.truncate(val_body, { length: length, separator: " " });
       return truncate;
+    },
+    randomNumber() {
+      var randnumber = "";
+      var ranNum = "";
+      for (ranNum = 1; ranNum <= 6; ranNum++) {
+        randnumber += Math.floor(Math.random() * 10).toString();
+      }
+      return randnumber;
     }
   }
 })

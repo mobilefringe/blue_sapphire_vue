@@ -17,6 +17,9 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    link: [
+      {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/vue2-animate@1.0.4/dist/vue2-animate.min.css'}
     ]
   },
 

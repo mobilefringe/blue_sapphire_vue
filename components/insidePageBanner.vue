@@ -1,6 +1,6 @@
 <template>
-  <div class="inside_page_banner" v-if="pageBanner" v-bind:style="{ backgroundImage: 'url(' + pageBanner.image_url + ')' }">
-  <!-- <div class="inside_page_banner" v-bind:style="{ backgroundImage: 'url(https://via.placeholder.com/1920x144)' }"> -->
+  <!-- <div class="inside_page_banner" v-if="pageBanner" v-bind:style="{ backgroundImage: 'url(' + pageBanner.image_url + ')' }"> -->
+  <div class="inside_page_banner" v-bind:style="{ backgroundImage: 'url(https://via.placeholder.com/1920x144)' }">
     <div class="container">
       <h1 v-if="page_name" class="inside_page_title">{{ page_name }}</h1>
     </div>
@@ -24,7 +24,7 @@
       next();
     },
 		mounted() {
-			this.pageBanner;
+			// this.pageBanner;
     },
     computed: {
       ...mapGetters([

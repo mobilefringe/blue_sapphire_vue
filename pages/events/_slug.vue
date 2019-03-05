@@ -7,8 +7,8 @@
           <h3 class="promo_details_name">{{ currentEvent.name }}</h3>
           <h5 v-if="isMultiDay(currentEvent, timezone)" class="promo_dates">{{ currentEvent.start_date | moment("MMMM D", timezone) }} - {{ currentEvent.end_date | moment("MMMM D", timezone) }}</h5>
           <h5 v-else class="promo_dates">{{ currentEvent.start_date | moment("MMMM D", timezone) }}</h5>
-          <img class="promo_details_img" :src="currentEvent.image_url" :alt="currentEvent.name" />
           <hr class="horizontal_div">
+          <img class="promo_details_img" :src="currentEvent.image_url" :alt="currentEvent.name" />
           <p class="promo_details_desc" v-html="currentEvent.rich_description"></p>
         </div>
       </div>

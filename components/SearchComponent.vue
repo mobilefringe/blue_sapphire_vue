@@ -1,33 +1,39 @@
 <template>
   <div class="search-component" v-if="autocomplete">
     <p class="control has-icon has-icon-right">
-      <input type="search" class="input is-large" :placeholder="placeholder" :suggestionAttribute="suggestionAttribute" v-on:input="onInput($event.target.value)"
+      <label style="display:none;" for="search_box">Search</label>
+      <input id="search_box" type="search" class="input is-large" :placeholder="placeholder" :suggestionAttribute="suggestionAttribute" v-on:input="onInput($event.target.value)"
         v-on:keyup.esc="isOpen = false" v-on:blur="isOpen = false" v-on:keydown.down="moveDown" v-on:keydown.up="moveUp" v-on:keydown.enter="select"
         :value="value">
-      <i class="fa fa-angle-down"></i>
     </p>
-    <ul v-show="isOpen" class="options-list">
-      <li v-for="(option, index) in result" :class="{'highlighted': index === highlightedPosition}" v-on:mouseenter="highlightedPosition = index" v-on:mousedown="select">
+    <ul v-show="isOpen" class="options-list" v-if="result.length > 0">
+      <li  v-for="(option, index) in result" :class="{'highlighted': index === highlightedPosition}" v-on:mouseenter="highlightedPosition = index" v-on:mousedown="select" :key="index">
         <slot name="item" :data="option"></slot>
+      </li>
+    </ul>
+    <ul v-else  v-show="isOpen" class="options-list">
+      <li>
+        <p>No Results</p>
       </li>
     </ul>
   </div>
   <div class="search-component" v-else>
     <p class="control has-icon has-icon-right">
-      <input type="search" class="input is-large" :placeholder="placeholder" v-on:keydown.enter="select" v-on:input="onInput($event.target.value)"
+      <i id="siteSearchBtn" class="fa fa-search"  @click="select"></i>
+      <label style="display:none;" for="search_box">Search</label>
+      <input  id="search_box" type="search" class="input is-large" :placeholder="placeholder" v-on:keydown.enter="select" v-on:input="onInput($event.target.value)"
         :value="value">
-      <i class="fa fa-angle-down"></i>
     </p>
   </div>
 </template>
 
 <script>
-  import Fuse from 'fuse.js'
+  import Fuse from "fuse.js";
   export default {
     props: {
       value: {
         type: String,
-        default: ''
+        default: ""
       },
       autocomplete: {
         type: Boolean,
@@ -35,7 +41,7 @@
       },
       placeholder: {
         type: String,
-        default: 'Search...'
+        default: "Search..."
       },
       suggestionAttribute: {
         type: String,
@@ -43,7 +49,7 @@
       },
       eventName: {
         type: String,
-        default: 'fuseResultsUpdated'
+        default: "fuseResultsUpdated"
       },
       defaultAll: {
         type: Boolean,
@@ -78,7 +84,7 @@
       },
       id: {
         type: String,
-        default: ''
+        default: ""
       },
       shouldSort: {
         type: Boolean,
@@ -115,16 +121,9 @@
         //search: '',
         fuse: null,
         result: []
-      }
+      };
     },
     computed: {
-      /*
-      fOptions() {
-        const re = new RegExp(this.search, 'i')
-        console.log(this.result);
-        return this.result.filter(o => o[this.suggestionAttribute].match(re))
-      },
-      */
       options() {
         var options = {
           caseSensitive: this.caseSensitive,
@@ -140,119 +139,115 @@
           maxPatternLength: this.maxPatternLength,
           minMatchCharLength: this.minMatchCharLength,
           keys: this.keys
+        };
+        if (this.id !== "") {
+          options.id = this.id;
         }
-        if (this.id !== '') {
-          options.id = this.id
+        if (this.keys === undefined) {
+          options.keys = [];
+          options.keys.push(this.suggestionAttribute);
         }
-        if (this.autocomplete == false || this.keys === undefined) {
-          options.keys = []
-          options.keys.push(this.suggestionAttribute)
-        }
-        return options
+        return options;
       }
     },
     watch: {
       value() {
-        if (this.value.trim() === '') {
+        if (this.value.trim() === "") {
           if (this.defaultAll) {
-            this.result = this.list
+            this.result = this.list;
           } else {
-            this.result = []
+            this.result = [];
           }
         } else {
-          this.result = this.fuse.search(this.value.trim())
+          this.result = this.fuse.search(this.value.trim());
         }
       },
       result() {
-        this.$parent.$emit(this.eventName, this.result)
+        this.$parent.$emit(this.eventName, this.result);
       }
     },
     methods: {
       onInput(value) {
-        this.highlightedPosition = 0
-        this.isOpen = !!value
-        this.$emit('input', value) // emit event back to parent
+        this.highlightedPosition = 0;
+        this.isOpen = !!value;
+        this.$emit("input", value); // emit event back to parent
       },
       moveDown() {
         if (!this.isOpen) {
-          return
+          return;
         }
-        this.highlightedPosition =
-          (this.highlightedPosition + 1) % this.result.length
+        this.highlightedPosition = (this.highlightedPosition + 1) % this.result.length;
       },
       moveUp() {
         if (!this.isOpen) {
-          return
+          return;
         }
-        this.highlightedPosition = this.highlightedPosition - 1 < 0 ? this.result.length - 1 : this.highlightedPosition -
-          1
+        this.highlightedPosition = this.highlightedPosition - 1 < 0 ? this.result.length - 1 : this.highlightedPosition - 1;
       },
       select() {
         if (this.autocomplete) {
-          const selectedOption = this.result[this.highlightedPosition]
-          this.$emit('select', selectedOption)
-          this.isOpen = false
-          this.$emit('input', selectedOption[this.suggestionAttribute])
+          const selectedOption = this.result[this.highlightedPosition];
+          this.$emit("select", selectedOption);
+          this.isOpen = false;
+          this.$emit("input", selectedOption[this.suggestionAttribute]);
         } else {
           const selectedOption = this.result;
-          this.$emit('select', selectedOption)
+          this.$emit("select", selectedOption);
         }
       },
       initFuse() {
         this.fuse = new Fuse(this.list, this.options);
         if (this.defaultAll) {
-          this.result = this.list
+          this.result = this.list;
         }
       }
     },
     mounted() {
-      this.initFuse()
+      this.initFuse();
     }
-  }
-
+  };
 </script>
 
 <style>
-  .search-component ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
+/* .search-component ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .search-component li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+.search-component li {
+  display: inline-block;
+  margin: 0 10px;
+}
 
-  .search-component {
-    width: 100%;
-    position: relative;
-  }
+.search-component {
+  width: 100%;
+  position: relative;
+} */
 
-  ul.options-list {
-    display: flex;
-    flex-direction: column;
-    margin-top: -12px;
-    border: 1px solid #dbdbdb;
-    border-radius: 0 0 3px 3px;
-    position: absolute;
-    width: 100%;
-    overflow: hidden;
-  }
+ul.options-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: -12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 0 0 3px 3px;
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
 
-  ul.options-list li {
-    width: 100%;
-    flex-wrap: wrap;
-    background: white;
-    margin: 0;
-    border-bottom: 1px solid #eee;
-    color: #363636;
-    padding: 7px;
-    cursor: pointer;
-  }
+ul.options-list li {
+  width: 100%;
+  flex-wrap: wrap;
+  background: white;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+  color: #363636;
+  padding: 7px;
+  cursor: pointer;
+}
 
-  ul.options-list li.highlighted {
-    background: #f8f8f8
-  }
-
+ul.options-list li.highlighted {
+  background: #f8f8f8;
+}
 </style>

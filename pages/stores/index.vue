@@ -115,7 +115,7 @@
       this.$nextTick(function() {
         this.filteredStores = this.allStores;
         if (this.tempSEO) {
-          this.currentSEO = this.localeSEO(this.tempSEO, this.locale);
+          this.currentSEO = this.tempSEO;
         }
       });
       next();
@@ -124,7 +124,6 @@
       if (this.tempSEO) {
         this.currentSEO = this.tempSEO;
       }
-
       this.filteredStores = this.allStores;
     },
     watch: {
@@ -153,10 +152,8 @@
           } else {
             value.no_store_logo = false;
           }
-
           store_list.push(value);
         });
-
         return store_list;
       },
       categorySelect() {
