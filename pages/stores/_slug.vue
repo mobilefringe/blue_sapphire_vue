@@ -41,7 +41,7 @@
             </div>
             <p v-if="currentStore.description" v-html="currentStore.description" class="store_details_description"></p>
           </div>
-          <div v-if="storeHours" class="grey_line store_details_hours margin_60">
+          <div v-if="storeHours.length > 0" class="grey_line store_details_hours margin_60">
             <h2 class="details_title">Store Hours</h2>
             <div v-for="(item, index) in storeHours" :key="index" class="hours_div">
               <div class="day">{{ item.day_of_week | moment("dddd", timezone) }}:</div>
@@ -236,7 +236,8 @@
             // STORE HOURS
             var storeHours = [];
             var store_hours = this.currentStore.store_hours;
-            if (store_hours) {
+            console.log("store_hours", store_hours)
+            if (store_hours != null) {
               _.forEach(store_hours, function (value, key) {
                 var hours = vm.findHourById(value);
                 var today = moment().day();
@@ -247,7 +248,9 @@
                 }
                 storeHours.push(hours);
               });
-              this.storeHours = _.sortBy(storeHours, function(o) { return o.day_of_week });
+              if (!_.isEmpty(storeHours)) {
+                this.storeHours = _.sortBy(storeHours, function(o) { return o.day_of_week });
+              }
             }
             
             // PROMOTIONS

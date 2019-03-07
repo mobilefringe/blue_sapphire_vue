@@ -406,7 +406,7 @@ h5 {
   }
   .footer_menu {
     margin: 0;
-    padding: 0 60px;
+    padding: 0 0 0 60px;
     display: block;
     column-count: 2;
     li {
@@ -991,12 +991,17 @@ textarea.form-control {
 .store_details_logo {
   margin: 0 auto;
   margin-bottom: 30px;
-  padding: 20px;
   width: 202px;
   height: 202px;
+  position: relative;
   border: 2px solid $primary;
   img {
+    padding: 20px;
     max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 .store_details_info {
