@@ -10,7 +10,6 @@
           <div class="directory_btn caps active">Centre Map</div>
         </div>
       </div>
-      <div class="margin_30"></div>
       <div class="row">
         <div class="col">
           <mapplic-map v-if="mobileMap" ref="svgmaprefmobile" :height="200" :minimap="false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale="5" :storelist="storeList" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
@@ -148,12 +147,12 @@
       //   this.$refs.mapplic_ref.showLocation(store.svgmap_region);
       // },
       dropPin(store) {
-      if (this.windowWidth <= 768 && this.selectedStore) {
-        this.svgMapRef.showLocation(store.svgmap_region);
-      } else if (this.windowWidth > 768) {
-        this.svgMapRef.showLocation(store.svgmap_region);
-      }
-    },
+        if (this.windowWidth <= 768 && this.selectedStore) {
+          this.svgMapRef.showLocation(store.svgmap_region);
+        } else if (this.windowWidth > 768) {
+          this.svgMapRef.showLocation(store.svgmap_region);
+        }
+      },
       updateSVGMap(map) {
         this.map = map;
         // this.dropPin(this.currentStore);

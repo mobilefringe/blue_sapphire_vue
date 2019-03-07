@@ -2,8 +2,8 @@ const pkg = require('./package')
 
 const webpack = require('webpack')
 const axios = require('axios')
-const API_URL = "https://mallmaverick.com/api/v4/sudburycentre"
-const MM_HOST = "https://sudburycentre.mallmaverick.com"
+const API_URL = "https://mallmaverick.com/api/v4/cambridgecentre"
+const MM_HOST = "https://cambridgecentre.mallmaverick.com"
 
 module.exports = {
   mode: 'spa',

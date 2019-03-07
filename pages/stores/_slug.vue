@@ -15,7 +15,7 @@
       <div class="margin_30"></div>
       <div class="row">
         <div class="col-md-6">
-          <mapplic-map ref="mapplic_ref" :height="358" :minimap= "false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale= "5" :storelist="mapStores" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
+          <mapplic-map id="store_details" ref="mapplic_ref" :height="358" :minimap= "false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale= "5" :storelist="mapStores" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
         </div>
         <div class="col-md-6 border_left">
           <div id="store_details_container">
@@ -83,12 +83,6 @@
     </div>
   </div>
 </template>
-
-<style>
-  .mapplic-popup-link {
-    display: none !important;
-  }
-</style>
 
 <script>
   import moment from 'moment'
