@@ -107,9 +107,9 @@ plugins: [
 
   /* Build configuration */
   build: {
-    babel: {
-      presets: ['es2015', 'stage-0']
-    },
+    // babel: {
+    //   presets: ['env', 'stage-0']
+    // },
     /* You can extend webpack config here */
     extend(config, ctx) {
       
@@ -122,6 +122,6 @@ plugins: [
         // ...etc.
       })
     ],
-    vendor: ['axios', 'jquery', 'lodash', 'fuse.js', 'moment', 'moment-timezone', 'vee-validate', 'vue-slick', 'vue-social-sharing', 'smoothscroll-polyfill', 'vue-select', 'babel-polyfill', 'whatwg-fetch', 'es6-shim']
+    vendor: ['babel-polyfill', 'axios', 'jquery', 'lodash', 'fuse.js', 'moment', 'moment-timezone', 'vee-validate', 'vue-slick', 'vue-social-sharing', 'smoothscroll-polyfill', 'vue-select', 'whatwg-fetch', 'es6-shim']
   }
 }
