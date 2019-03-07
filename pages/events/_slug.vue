@@ -9,7 +9,7 @@
           <h5 v-else class="promo_dates">{{ currentEvent.start_date | moment("MMMM D", timezone) }}</h5>
           <hr class="horizontal_div">
           <img class="promo_details_img" :src="currentEvent.image_url" :alt="currentEvent.name" />
-          <p class="promo_details_desc" v-html="currentEvent.rich_description"></p>
+          <div class="promo_desc details" v-html="currentEvent.rich_description"></div>
         </div>
       </div>
     </div>
@@ -89,18 +89,20 @@
     },
     methods: {
       updateCurrentEvent(slug) {
-        this.currentEvent = this.findEventBySlug(slug);
-        if (this.currentEvent === null || this.currentEvent === undefined){
-          this.$router.replace({ name: 'events'});
-        } else {
-          this.page_name = this.property.name;
-
-          if (_.includes(this.currentEvent.event_image_url_abs, 'missing')) {
-            this.currentEvent.image_url = "https://codecloud.cdn.speedyrails.net/sites/5bbfac0c6e6f6411b3040000/image/png/1546551307522/eventplaceholder2@2x.png"
+        this.$nextTick(function() {
+          this.currentEvent = this.findEventBySlug(slug);
+          if (this.currentEvent === null || this.currentEvent === undefined){
+            this.$router.replace({ name: 'events'});
           } else {
-            this.currentEvent.image_url = this.currentEvent.event_image_url_abs;
+            this.page_name = this.property.name;
+
+            if (_.includes(this.currentEvent.event_image_url_abs, 'missing')) {
+              this.currentEvent.image_url = "https://codecloud.cdn.speedyrails.net/sites/5bbfac0c6e6f6411b3040000/image/png/1546551307522/eventplaceholder2@2x.png"
+            } else {
+              this.currentEvent.image_url = this.currentEvent.event_image_url_abs;
+            }
           }
-        }
+        });
       }
     }
   }

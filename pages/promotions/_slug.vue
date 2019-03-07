@@ -9,7 +9,7 @@
           <h5 v-else class="promo_dates">{{ currentPromo.start_date | moment("MMMM D", timezone) }}</h5>
           <hr class="horizontal_div">
           <img class="promo_details_img" :src="currentPromo.image_url" :alt="currentPromo.name" />
-          <p class="promo_details_desc" v-html="currentPromo.rich_description"></p>
+          <div class="promo_desc details" v-html="currentPromo.rich_description"></div>
         </div>
       </div>
     </div>
@@ -88,25 +88,24 @@
     },
     methods: {
       updateCurrentPromo(slug) {
-        console.log("slug", slug)
-        var slug = slug
-        this.currentPromo = this.findPromoBySlug(slug);
-        console.log("currentPromo", this.currentPromo)
-        if (this.currentPromo != null || this.currentPromo != undefined){
-          if (this.currentPromo.store != null || this.currentPromo.store != undefined) {
-            this.page_name = this.currentPromo.store.name;
+        this.$nextTick(function() {
+          this.currentPromo = this.findPromoBySlug(slug);
+          if (this.currentPromo === null || this.currentPromo === undefined){
+            this.$router.replace({ name: 'promotions'});
           } else {
-            this.page_name = this.property.name;
-          }
+            if (this.currentPromo.store != null || this.currentPromo.store != undefined) {
+              this.page_name = this.currentPromo.store.name;
+            } else {
+              this.page_name = this.property.name;
+            }
 
-          if (_.includes(this.currentPromo.promo_image_url_abs, 'missing')) {
-            this.currentPromo.image_url = "https://codecloud.cdn.speedyrails.net/sites/5bbfac0c6e6f6411b3040000/image/png/1546551307522/eventplaceholder2@2x.png"
-          } else {
-            this.currentPromo.image_url = this.currentPromo.promo_image_url_abs;
+            if (_.includes(this.currentPromo.promo_image_url_abs, 'missing')) {
+              this.currentPromo.image_url = "https://codecloud.cdn.speedyrails.net/sites/5bbfac0c6e6f6411b3040000/image/png/1546551307522/eventplaceholder2@2x.png"
+            } else {
+              this.currentPromo.image_url = this.currentPromo.promo_image_url_abs;
+            }
           }
-        } else {
-          this.$router.replace({ name: 'promotions'});
-        }
+        });
       }
     }
   }

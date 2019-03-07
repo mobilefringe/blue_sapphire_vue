@@ -222,7 +222,7 @@ h5 {
     border: none;
     font-size: 0.75rem;
   }
-  .fa.fa-angle-down{
+  .fa.fa-search{
     padding-left: 0 !important;
     &:before {
       content: "\f002";
@@ -762,7 +762,10 @@ h5 {
 }
 .form-input {
 	margin-bottom: 20px;
-	position: relative;
+  position: relative;
+  label {
+    margin: 5px 0 0 0;
+  }
 }
 .form-control {
 	padding: 9px 13px;
@@ -788,6 +791,17 @@ textarea.form-control {
 .checkbox {
   margin: 0;
   font-size: 0.875rem;
+}
+
+/* MAP */ 
+#mapplic {
+  border: 1px solid $accent;
+}
+.mapplic-zoom-buttons {
+  top: 0;
+  right: 0;
+  bottom: unset !important;
+  left: unset !important;
 }
 /* STORES */
 .directory_container {
@@ -853,7 +867,7 @@ textarea.form-control {
   border: 1px solid $accent;
   text-align: center;
   .store_img, .store_no_hover_img {
-    padding: 25px;
+    padding: 20px;
     max-width: 100%;
     position: relative;
     position: absolute;
@@ -972,19 +986,27 @@ textarea.form-control {
 .store_details_logo {
   margin: 0 auto;
   margin-bottom: 30px;
-  width: 195px;
-  height: 195px;
-  border: 2px solid #000;
-  background: #000;
+  padding: 20px;
+  width: 202px;
+  height: 202px;
+  border: 2px solid $primary;
   img {
     max-width: 100%;
   }
 }
-.store_detail_highlight {
+.store_details_info {
+  column-count: 2;
+}
+.store_details_highlight {
   color: $primary;
 }
-.store_hours_container {
-  padding: 10px 0;
+.store_details_description {
+  margin-bottom: 60px;
+}
+.store_details_hours {
+  .hours_div {
+    width: 100%;
+  }
 }
 
 /* PROMOTION */ 
@@ -1018,7 +1040,27 @@ textarea.form-control {
   font-size: 1.125rem;
   line-height: 1.25rem;
   text-align: justify;
-  color: #000;
+  color: $font;
+  p, p span, a {
+    font-family: $font-sans !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+  }
+  a {
+    font-family: $font-sans !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: #4990e2 !important;
+    text-decoration: underline !important;
+    transition: all .1s ease;
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+.promo_desc.details {
+  margin-top: 30px;
 }
 .grey_line {
   border-top: 1px solid #000;

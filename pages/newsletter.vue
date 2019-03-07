@@ -6,10 +6,6 @@
         <div class="col-lg-6">
           <h2>Keep current.</h2>
           <div class="margin_30 hidden_phone"></div>
-        <!-- </div>
-      </div>
-      <div class="row"> 
-        <div class="col-lg-6"> -->
           <p> Sign up for our newsletter and you’ll be the first to know about upcoming events and promotions.</p>
           <hr class="horizontal_div show_phone">
         </div>
@@ -25,20 +21,20 @@
                   </div>
                   <div class="form-input col-md-6">
                     <div class="mc-field-group">
-                      <label class="accessibility" for="mce-FNAME">First Name  <span class="asterisk">*</span></label>
-                      <input type="text" value="" name="FNAME" class="form-control required" id="mce-FNAME" placeholder="First Name *">
+                      <label for="mce-FNAME">First Name  <span class="asterisk">*</span></label>
+                      <input type="text" value="" name="FNAME" class="form-control required" id="mce-FNAME" placeholder="">
                     </div>
                   </div>
                   <div class="form-input col-md-6">
                     <div class="mc-field-group">
-                      <label class="accessibility" for="mce-LNAME">Last Name  <span class="asterisk">*</span></label>
-                      <input type="text" value="" name="LNAME" class="form-control required" id="mce-LNAME" placeholder="Last Name *">
+                      <label for="mce-LNAME">Last Name  <span class="asterisk">*</span></label>
+                      <input type="text" value="" name="LNAME" class="form-control required" id="mce-LNAME" placeholder="">
                     </div>
                   </div>
                   <div class="form-input col-lg-12">
                     <div class="mc-field-group">
-                      <label class="accessibility" for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
-                      <input type="email" value="" name="EMAIL" class="form-control required email" id="mce-EMAIL" placeholder="Email *">
+                      <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+                      <input type="email" value="" name="EMAIL" class="form-control required email" id="mce-EMAIL" placeholder="">
                     </div>
                   </div>
                 </div>
@@ -76,11 +72,11 @@
           <!-- <form class="form-horizontal" action="https://mobilefringe.createsend.com/t/d/s/fiilhi/" method="post">
             <div class="form-group row">
               <div class="form-input col-md-6 col-lg-12">
-                <label class="accessibility" for="cm-name">Name</label>
+                <label for="cm-name">Name</label>
                 <input v-model="form_data.name" required class="form-control" name="cm-name" type="text" placeholder="Name">
               </div>
               <div class="form-input col-md-6 col-lg-12">
-                <label class="accessibility" for="cm-irudui-irudui">Email</label>
+                <label for="cm-irudui-irudui">Email</label>
                 <input v-model="form_data.email" required class="form-control" name="cm-fiilhi-fiilhi" type="email" placeholder="Email" id="newsletter_email">
               </div>
             </div>

@@ -15,48 +15,42 @@
       <div class="margin_30"></div>
       <div class="row">
         <div class="col-md-6">
-          <!-- MAP -->
-          <!-- <mapplic-map ref="svgmap_ref" :height="300" :minimap= "false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale= "5" :storelist="processedStores" :floorlist="floorList" :svgWidth="2500" :svgHeight="2500" @updateMap="updateSVGMap" :key="currentStore.id"></mapplic-map> -->
-          
-        
+          <mapplic-map ref="mapplic_ref" :height="358" :minimap= "false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale= "5" :storelist="mapStores" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
         </div>
         <div class="col-md-6 border_left">
           <div id="store_details_container">
             <div v-if="currentStore.store_logo"  class="store_details_logo">
               <img :src="currentStore.store_logo" :alt="currentStore.name + ' Logo'" />
             </div>
-            <p v-if="currentStore.phone" class="center">
-              <span class="store_detail_highlight">Phone:</span> {{ currentStore.phone }}
-            </p>
-            <p v-if="currentStore.website" class="center">
-              <a :href="currentStore.website" target="_blank">
-                <span class="store_detail_highlight">Visit Store Website</span> 
-              </a>
-            </p>
-            <p v-if="currentStore.category_list" class="center">
-              <span class="store_detail_highlight">Categories:</span>
-              <span v-for="(item, index) in currentStore.category_list" :key="index">{{ item.name }}<span v-if="index != Object.keys(currentStore.category_list).length - 1">, </span></span>
-            </p>
-            <p v-if="currentStore.z_coordinate" class="center">
-              <span class="store_detail_highlight">Location:</span> Level {{ currentStore.z_coordinate }}
-            </p>
-            <p v-if="currentStore.description" v-html="currentStore.description"></p>
+            <div class="store_details_info">
+              <p v-if="currentStore.phone" class="center">
+                <span class="store_details_highlight">Phone:</span> {{ currentStore.phone }}
+              </p>
+              <p v-if="currentStore.website" class="center">
+                <a :href="currentStore.website" target="_blank">
+                  <span class="store_details_highlight">Visit Store Website</span> 
+                </a>
+              </p>
+              <p v-if="currentStore.category_list" class="center">
+                <span class="store_details_highlight">Categories:</span>
+                <span v-for="(item, index) in currentStore.category_list" :key="index">{{ item.name }}<span v-if="index != Object.keys(currentStore.category_list).length - 1">, </span></span>
+              </p>
+              <p v-if="currentStore.z_coordinate" class="center">
+                <span class="store_details_highlight">Location:</span> Level {{ currentStore.z_coordinate }}
+              </p>
+            </div>
+            <p v-if="currentStore.description" v-html="currentStore.description" class="store_details_description"></p>
           </div>
-            <!-- <div id="hours" class="grey_line hidden_now">
-                <h2 class="details_title">Store Hours</h2>
-                <div id="hours_container" class="store_hours_container">
-                    <script id="hours_template" type="x-tmpl-mustache/text">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <span>{{day}}</span>
-                            </div>
-                            <div class="col-xs-7">
-                                <span class="pull-right">{{hour_string}}</span>
-                            </div>
-                        </div>
-                    </script>
-                </div>
-            </div> -->
+          <div v-if="storeHours" class="grey_line store_details_hours margin_60">
+            <h2 class="details_title">Store Hours</h2>
+            <div v-for="(item, index) in storeHours" :key="index" class="hours_div">
+              <div class="day">{{ item.day_of_week | moment("dddd", timezone) }}:</div>
+              <div class="time">
+                <span v-if="item.is_closed">Closed</span>
+                <span v-else>{{ item.open_time | moment("h:mm A", timezone)}} - {{ item.close_time | moment("h:mm A", timezone) }}</span>
+              </div>
+            </div>
+          </div>
           <!-- PROMOTIONS -->
           <div v-if="storePromotions.length > 0" class="grey_line">
             <h2 class="details_title">Sales & Promotions</h2>
@@ -90,18 +84,45 @@
   </div>
 </template>
 
+<style>
+  .mapplic-popup-link {
+    display: none !important;
+  }
+</style>
+
 <script>
-  import { mapGetters } from "vuex"
-  // import MapplicMap from '~/components/Mapplic.vue'
+  import moment from 'moment'
+  import tz from 'moment-timezone'
+  import { mapGetters } from 'vuex'
+  import MapplicMap from '~/components/Mapplic.vue'
 
   export default {
     head() {
-      return this.currentSEO;
+      return {
+        title: this.currentSEO.meta_title,
+        meta: [
+          {
+            hid: "description",
+            name: "description",
+            content: this.currentSEO.meta_description
+          },
+          {
+            hid: "keywords",
+            name: "keywords",
+            content: this.currentSEO.meta_keywords
+          },
+          {
+            hid: "image",
+            name: "image",
+            content: this.currentSEO.image
+          }
+        ]
+      };
     },
     transition: "page",
     components: {
       insidePageBanner: () => import("~/components/insidePageBanner.vue"),
-      // MapplicMap
+      MapplicMap
     },
     data() {
       return {
@@ -109,9 +130,9 @@
         currentSEO: {},
         currentStore: {},
         page_name: "",
-        storeHours: {},
-        storePromotions: {},
-        storeJobs: {}
+        storeHours: [],
+        storePromotions: [],
+        storeJobs: []
       };
     },
     async asyncData({ store, params, route }) {
@@ -132,9 +153,10 @@
       next();
     },
     mounted() {
+      this.getSVGMap;
+    },
+    created() {
       this.updateCurrentStore(this.$route.params.slug);
-      // this.getSVGMap;
-
     },
     computed: {
       ...mapGetters([
@@ -149,112 +171,126 @@
         'findPromoById',
         'findJobById'
       ]),
-      // getSVGurl() {
-      //   return "https://www.mallmaverick.com" + this.property.svg_map_url;
-      // },
-      // svgMapRef() {
-      //   return this.$refs.svgmap_ref;
-      // },
-      // allStores() {
-      //   this.processedStores.map(function(store){ store.zoom = 4; });
-      //   return this.processedStores;
-      // },
-      // floorList () {
-      //   var floor_list = [];
-      //   var floor_1 = {};
-      //   floor_1.id = "first-floor";
-      //   floor_1.title = "Level 1";
-      //   floor_1.map = this.getSVGurl;
-      //   floor_1.z_index = 1;
-      //   floor_1.show = true;
-      //   floor_list.push(floor_1);
-      //   return floor_list;
-      // }
+      mapStores() {
+        var all_stores = this.processedStores;
+        _.forEach(all_stores, function(value, key) {
+          value.zoom = 2;
+          if(value.svgmap_region == null){
+            value.svgmap_region = value.id;
+          }
+        });
+        return all_stores;
+      },
+      storeNames () {
+        return _.map(this.processedStores, 'name');
+      },
+      getSVGMap(){
+        var map_url = "//mallmaverick.com" + this.property.svgmap_url;  
+        map_url = _.split(map_url, '?');
+        map_url = map_url[0];
+        return map_url;
+      },
+      floorList () {
+        var floor_list = [];
+        var floor_1 = {};
+        floor_1.id = "first-floor";
+        floor_1.title = "Level One";
+        floor_1.map = this.getSVGMap;
+        floor_1.z_index = null;
+        floor_1.show = true;
+        floor_list.push(floor_1);
+        
+        return floor_list;
+      }
     },
     methods: {
       updateCurrentStore(slug) {
-        this.currentStore = this.findStoreBySlug(slug);
-        if (this.currentStore === null || this.currentStore === undefined){
-          this.$router.replace({ path: '/stores'});
-        } else {
-          var vm = this;
-          // STORE NAME
-          this.page_name = this.currentStore.name;
-          // STORE LOGO
-          if (_.includes(this.currentStore.store_front_url_abs, 'missing')) {
-            this.currentStore.no_logo = true
+        this.$nextTick(function() {
+          this.currentStore = this.findStoreBySlug(slug);
+          if (this.currentStore === null || this.currentStore === undefined){
+            this.$router.replace({ path: '/stores'});
           } else {
-            this.currentStore.no_logo = false;
-            this.currentStore.store_logo = this.currentStore.store_front_url_abs;
-          }
-          // STORE CATEGORIES
-          var store_categories = this.currentStore.categories;
-          if (store_categories.length) {
-            var category = "";
-            var category_list = [];
-            _.forEach(store_categories, function(value, key) {
-              category = vm.findCategoryById(value);
-              category_list.push(category)
+            var vm = this;
+            // STORE NAME
+            this.page_name = this.currentStore.name;
+            // STORE LOGO
+            if (_.includes(this.currentStore.store_front_url_abs, 'missing')) {
+              this.currentStore.no_logo = true
+            } else {
+              this.currentStore.no_logo = false;
+              this.currentStore.store_logo = this.currentStore.store_front_url_abs;
+            }
+            // STORE CATEGORIES
+            var store_categories = this.currentStore.categories;
+            if (store_categories != null && store_categories.length > 0) {
+              var category = "";
+              var category_list = [];
+              _.forEach(store_categories, function(value, key) {
+                category = vm.findCategoryById(value);
+                category_list.push(category)
+              });
+              if (category_list.length) {
+                this.currentStore.category_list = category_list;
+              }
+            }
+
+            // STORE WEBSITE 
+            // if (this.currentStore.website) {
+            //   this.currentStore.website = "http://" + this.currentStore.website
+            // }
+
+            // STORE HOURS
+            var storeHours = [];
+            var store_hours = this.currentStore.store_hours;
+            if (store_hours) {
+              _.forEach(store_hours, function (value, key) {
+                var hours = vm.findHourById(value);
+                var today = moment().day();
+                if (today == hours.day_of_week) {
+                  hours.todays_hours = true;
+                } else {
+                  hours.todays_hours = false;
+                }
+                storeHours.push(hours);
+              });
+              this.storeHours = _.sortBy(storeHours, function(o) { return o.day_of_week });
+            }
+            
+            // PROMOTIONS
+            var temp_promo = [];
+            var promos = this.currentStore.promotions;
+            _.forEach(promos, function(value, key) {
+              var current_promo = vm.findPromoById(value);
+              if (_.includes(current_promo.promo_image_url_abs, 'missing')) {
+                current_promo.image_url = "https://placehold.it/1560x800/757575";
+              } else {
+                current_promo.image_url = current_promo.promo_image_url_abs;
+              }
+              
+              current_promo.desc_short = _.truncate(current_promo.description, { 'length': 250, 'separator': ' ' });
+              
+              temp_promo.push(current_promo);
+            }); 
+            this.storePromotions = temp_promo;
+
+            // JOBS 
+            var temp_jobs = [];
+            var jobs = this.currentStore.jobs;
+            _.forEach(jobs, function(value, key) {
+              var current_job = vm.findJobById(value);
+              temp_jobs.push(current_job);
             });
-            if (category_list.length) {
-              this.currentStore.category_list = category_list;
-            }
+            this.storeJobs = temp_jobs;
           }
-
-          // STORE WEBSITE 
-          // if (this.currentStore.website) {
-          //   this.currentStore.website = "http://" + this.currentStore.website
-          // }
-
-          // STORE HOURS
-          var storeHours = [];
-          _.forEach(this.currentStore.store_hours, function (value, key) {
-            hours = vm.findHourById(value);
-            today = moment().day();
-            if (today == hours.day_of_week) {
-              hours.todays_hours = true;
-            } else {
-              hours.todays_hours = false;
-            }
-            storeHours.push(hours);
-          });
-          this.storeHours = _.sortBy(storeHours, function(o) { return o.day_of_week });
-          
-          // PROMOTIONS
-          var temp_promo = [];
-          var promos = this.currentStore.promotions;
-          _.forEach(promos, function(value, key) {
-            var current_promo = vm.findPromoById(value);
-            if (_.includes(current_promo.promo_image_url_abs, 'missing')) {
-              current_promo.image_url = "https://placehold.it/1560x800/757575";
-            } else {
-              current_promo.image_url = current_promo.promo_image_url_abs;
-            }
-            
-            current_promo.desc_short = _.truncate(current_promo.description, { 'length': 250, 'separator': ' ' });
-            
-            temp_promo.push(current_promo);
-          }); 
-          this.storePromotions = temp_promo;
-
-          // JOBS 
-          var temp_jobs = [];
-          var jobs = this.currentStore.jobs;
-          _.forEach(jobs, function(value, key) {
-            var current_job = vm.findJobById(value);
-            temp_jobs.push(current_job);
-          });
-          this.storeJobs = temp_jobs;
-        }
+        });
       },
-      // updateSVGMap(map) {
-      //   this.map = map;
-      //   this.svgMapRef.showLocation(this.currentStore.svgmap_region);
-      //   this.svgMapRef.addActiveClass(this.currentStore.svgmap_region);
-      // },
-      // dropPin(store) {
-      //   this.svgMapRef.showLocation(store.svgmap_region);
-      // },
+      dropPin(store) {
+        this.$refs.mapplic_ref.showLocation(store.svgmap_region);
+      },
+      updateSVGMap(map) {
+        this.map = map;
+        this.dropPin(this.currentStore);
+      }
     }
   };
 </script>

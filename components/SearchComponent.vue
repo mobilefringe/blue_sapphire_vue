@@ -19,10 +19,10 @@
   </div>
   <div class="search-component" v-else>
     <p class="control has-icon has-icon-right">
-      <i id="siteSearchBtn" class="fa fa-search"  @click="select"></i>
       <label style="display:none;" for="search_box">Search</label>
       <input  id="search_box" type="search" class="input is-large" :placeholder="placeholder" v-on:keydown.enter="select" v-on:input="onInput($event.target.value)"
         :value="value">
+      <i id="siteSearchBtn" class="fa fa-search"  @click="select"></i>
     </p>
   </div>
 </template>

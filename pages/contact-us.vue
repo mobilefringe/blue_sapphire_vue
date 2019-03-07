@@ -25,52 +25,52 @@
             </div>
           </transition> 
           <form id="contact-us-form" class="form-horizontal" action="form-submit" v-on:submit.prevent="validateBeforeSubmit">
-            <div class="form-group row">
+            <div class="row">
               <div class="form-input col-sm-6 col-xs-12" :class="{'has-error': errors.has('first_name')}">
-                <label class="accessibility" for="first_name">First Name</label>
+                <label class="" for="first_name">First Name *</label>
                 <input id="first_name" v-model="form_data.first_name" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="first_name" data-vv-as="First Name"
-                  type="text" data-vv-delay="1000" placeholder="First Name" required>
+                  type="text" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('firts_name')" class="form-control-feedback">{{ errors.first('first_name') }}</span>
               </div>
               <div class="form-input col-sm-6 col-xs-12" :class="{'has-error': errors.has('last_name')}">
-                <label class="accessibility" for="last_name">Last Name</label>
+                <label class="" for="last_name">Last Name *</label>
                 <input id="last_name" v-model="form_data.last_name" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="last_name" data-vv-as="Last Name"
-                  type="text" data-vv-delay="1000" placeholder="Last Name" required>
+                  type="text" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('last_name')" class="form-control-feedback">{{ errors.first('last_name') }}</span>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('email')}">
-                <label class="accessibility" for="email">Email Address</label>
+                <label class="" for="email">Email Address *</label>
                 <input id="email" v-model="form_data.email" v-validate="'required|email'" class="form-control" :class="{'input': true}" name="email" data-vv-as="Email"
-                  type="email" data-vv-delay="1000" placeholder="Email Address" required>
+                  type="email" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('email')" class="form-control-feedback">{{ errors.first('email') }}</span>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('subject')}">
-                <label class="accessibility" for="subject">Subject</label>
+                <label class="" for="subject">Subject *</label>
                 <input id="subject" v-model="form_data.subject" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="subject" data-vv-as="Subject"
-                  type="text" data-vv-delay="1000" placeholder="Subject" required>
+                  type="text" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('firts_name')" class="form-control-feedback">{{ errors.first('subject') }}</span>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('message')}">
-                <label class="accessibility" for="message">Message</label>
+                <label class="" for="message">Message *</label>
                 <textarea id="message" v-model="form_data.message" v-validate="'required:true'" class="form-control" :class="{'input': true}" name="message" data-vv-as="Message"
-                  type="text" data-vv-delay="1000" placeholder="Message"></textarea>
+                  type="text" data-vv-delay="1000" placeholder=""></textarea>
                 <span v-show="errors.has('message')" class="form-control-feedback">{{ errors.first('message') }}</span>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="row">
               <div class="col-sm-12" :class="{'has-error': errors.has('message')}">
                 <label class="checkbox">
                   <input name="agree_newsletter" v-validate="'required:true'" :class="{'input': true}" type="checkbox" required> <span>I agree to receive electronic communications from <span class="caps">{{ property.name }}</span>.</span>
                 </label>
               </div>
             </div>
-            <div class="form-group row">
+            <div class="row">
               <div class="col-sm-12">
                 <button class="animated_btn" type="submit" :disabled="formSuccess">Submit</button>
               </div>

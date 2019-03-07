@@ -7,7 +7,7 @@
           <h2 class="promo_name">{{ currentJob.name }} <span v-if="currentJob.job_type"> - {{ currentJob.job_type }}</span></h2>
           <h4 class="promo_dates">Deadline: {{ currentJob.end_date | moment("MMM D, YYYY", timezone) }}</h4>
           <hr class="horizontal_div">
-          <div v-html="currentJob.rich_description" class="promo_details_desc"></div>
+          <div v-html="currentJob.rich_description" class="promo_desc"></div>
           <hr v-if="currentJob.contact_name || currentJob.contact_phone || currentJob.contact_email || currentJob.contact_website || currentJob.message" class="horizontal_div">
           <p v-if="currentJob.contact_name" class="no_margin">Contact Name: {{ currentJob.contact_name }}</p>
           <p v-if="currentJob.contact_phone" class="no_margin">Phone Number: {{ currentJob.contact_phone }}</p>
@@ -91,19 +91,20 @@
     },
     methods: {
       updateCurrentJob(slug) {
-        this.currentJob = this.findJobBySlug(slug);
-        console.log("currentJob", this.currentJob)
-        if (this.currentJob != null || this.currentJob != undefined){
-          var property_name = this.property.name
-          if (this.currentJob.store == null || this.currentJob.store == undefined) {
-            this.page_name = property_name;
+        this.$nextTick(function() {
+          this.currentJob = this.findJobBySlug(slug);
+          if (this.currentJob === null || this.currentJob === undefined){
+            this.$router.replace({ name: 'jobs'});
           } else {
-            this.currentJob.store_name = this.currentJob.store.name;
-            this.page_name = this.currentJob.store_name;
+            var property_name = this.property.name
+            if (this.currentJob.store == null || this.currentJob.store == undefined) {
+              this.page_name = property_name;
+            } else {
+              this.currentJob.store_name = this.currentJob.store.name;
+              this.page_name = this.currentJob.store_name;
+            }
           }
-        } else {
-          this.$router.replace({ name: 'jobs'});
-        }
+        });
       }
     }
   }
