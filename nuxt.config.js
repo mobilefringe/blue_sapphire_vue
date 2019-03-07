@@ -107,6 +107,9 @@ plugins: [
 
   /* Build configuration */
   build: {
+    babel: {
+      presets: ['es2015', 'stage-0']
+    },
     /* You can extend webpack config here */
     extend(config, ctx) {
       
