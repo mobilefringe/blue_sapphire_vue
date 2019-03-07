@@ -149,8 +149,8 @@
     },
     methods: {
       validateBeforeSubmit() {
-        // this.$validator.validateAll().then((result) => {
-        //   if (result) {
+        this.$validator.validateAll().then((result) => {
+          if (result) {
             let send_data = new FormData();
             // send_data.append("mailto", this.property.contact_email);
             send_data.append("mailto", "caitlin@mobilefringe.com");
@@ -172,8 +172,8 @@
             .catch(error => {
               vm.formError = true;
             });
-        //   }
-        // })
+          }
+        })
       },
       serializeObject(obj) {
         var newObj = [];
