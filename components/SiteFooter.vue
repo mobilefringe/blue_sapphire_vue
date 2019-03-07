@@ -78,7 +78,7 @@
       };
     },
     created() {
-      this.$store.dispatch("LOAD_PAGE_DATA", { url: "http://cambridgecentre.mallmaverick.com/api/v4/cambridgecentre/social.json" }).then(response => {
+      this.$store.dispatch("LOAD_PAGE_DATA", { url: "https://cambridgecentre.mallmaverick.com/api/v4/cambridgecentre/social.json" }).then(response => {
         this.socialFeed = response.data.social
       });
     },
