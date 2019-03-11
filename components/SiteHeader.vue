@@ -28,7 +28,7 @@
         <div class="container">
           <div class="logo_container">
             <a href="/">
-              <img class="logo" src="//codecloud.cdn.speedyrails.net/sites/5aa1884a6e6f64062b310000/image/png/1517341893000/logo.png"/>
+              <img class="logo" src="https://www.mallmaverick.com/system/site_images/photos/000/049/774/original/cambridge_centre.png?1552075136" :alt="property.name + ' Logo'"/>
             </a>
           </div>  
           <div id="menu-icon" @click="showMenu = !showMenu" :class="{ open: showMenu }" class="visible_phone hamburger">

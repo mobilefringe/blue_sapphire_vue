@@ -14,19 +14,16 @@
             </div>
             <div class="margin_20 hidden_phone"></div>
             <a href="/hours">
-              <div class="footer_btn">
-                <span class="footer_btn_text caps">View All Hours</span>
-              </div>
+              <div class="animated_btn">View All Hours</div>
             </a>
             <hr class="footer_divider">
           </div>
-          
-          
           <div class="col-md-6 col-lg-4 order-lg-last">
             <h3 class="footer_title caps">Menu</h3>
             <ul class="footer_menu footer_menu_left">
               <li v-for="(item, index) in menu_items" :key="index">
-                <router-link :to="item.href">{{ item.name }}</router-link>
+                <a v-if="item.target" :href="item.href" target="_blank">{{ item.name }}</a>
+                <router-link v-else :to="item.href">{{ item.name }}</router-link>
               </li>
             </ul>
             <hr class="footer_divider">
@@ -36,11 +33,25 @@
             <div id="instafeed">
               <div v-for="(item, index) in instaFeed" :key="index" class="insta_container">
                 <a :href="item.link" target="_blank">
-                  <img :src="item.insta_img" alt=""/>
+                  <img :src="item.insta_img" :alt="truncate(item.insta_caption, 25)"/>
                 </a>
               </div>
             </div>
             <hr class="footer_divider">
+          </div>
+        </div>
+        <div class="row footer_logos">
+          <div class="col-3">
+            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/774/original/cambridge_centre.png?1552075136" alt="Cambridge Centre Logo" />
+          </div>
+          <div class="col-3">
+            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/773/original/morguard.png?1552075127" alt="Morguard Logo" />
+          </div>
+          <div class="col-3">
+            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/772/original/silver_award.png?1552075121" alt="" />
+          </div>
+          <div class="col-3">
+            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/771/original/ice_centre_logo.png?1552075118" alt="" />
           </div>
         </div>
       </div>
@@ -49,9 +60,6 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <router-link to="/">
-              <img class="show_phone logo" src="//codecloud.cdn.speedyrails.net/sites/5aa1884a6e6f64062b310000/image/png/1520287579515/logosmall-w.png"/>
-            </router-link>
             <p>&copy;{{ copyrightYear }} {{ property.name }}.<br class="hidden_now"> All rights reserved. <a href="/pages/cornwall-privacy-policy">Privacy Policy</a> | <a href="">Terms & Conditions</a>.</p>
           </div>
           <div class="col-sm-3 text-right">
@@ -97,6 +105,7 @@
           _.forEach(social_feed, function(value, key) {
             if (value.images.thumbnail) {
               value.insta_img = value.images.thumbnail.url;
+              value.insta_caption = value.caption.text;
             }
           });
           return social_feed

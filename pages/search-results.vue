@@ -12,7 +12,7 @@
               <div v-if="result.is_store" class="col-sm-2 store_details_image center-block">
                 <div v-if="checkMissingImage(result)">
                   <div class="no_logo">
-                    <img class="max-width" src="//codecloud.cdn.speedyrails.net/sites/5b88438d6e6f641e8d3c0000/image/png/1536092029690/transparent_logo.png">
+                    <img class="max-width" src="//codecloud.cdn.speedyrails.net/sites/5b88438d6e6f641e8d3c0000/image/png/1536092029690/transparent_logo.png" alt="">
                     <p class="store_details_name">
                       <span v-if="result.store_front_url_abs">{{result.name}}</span>
                       <span v-else>{{ result.store.name }}</span>
@@ -20,12 +20,12 @@
                   </div>    
                 </div> 
                 <div v-else>
-                  <img v-if="result.store" class="max-width" :src="result.store.store_front_url_abs"/>
-                  <img v-else-if="result.store_front_url_abs" class="max-width" :src="result.store_front_url_abs"/>
+                  <img v-if="result.store" class="max-width" :src="result.store.store_front_url_abs" :alt="result.store.name + ' Logo'"/>
+                  <img v-else-if="result.store_front_url_abs" class="max-width" :src="result.store_front_url_abs" :alt="result.name + ' Logo'" />
                 </div>
               </div>
               <div v-else class="col-sm-2 store_details_image center-block">
-                <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/044/637/original/default_logo.png?1539618404"/>    
+                <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/044/637/original/default_logo.png?1539618404" alt=""/>    
               </div>
               <div class="col-sm-10 search_result_content">
                 <h3 class="search_results_name">{{ result.name }}</h3>
@@ -47,7 +47,7 @@
           </div>
         </div>
 		  </div>
-      <div class="page_container text-left no_search_results" v-else> 
+      <div class="page_container text-left no_search_results margin_30" v-else> 
         <h3>Sorry, there are no search results. Please try a different query.</h3>
       </div>
     </div>

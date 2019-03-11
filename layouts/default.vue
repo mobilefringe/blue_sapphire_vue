@@ -130,6 +130,10 @@
             href: "/events",
           },
           {
+            name: "Contest",
+            href: "/contest",
+          },
+          {
             name: "Careers",
             href: "/jobs",
           },
@@ -148,7 +152,7 @@
           },
           {
             name: "Code of Conduct",
-            href: "/",
+            href: "/pages/cambridgecentre-code-of-conduct",
           },
         ],
         social_media: [

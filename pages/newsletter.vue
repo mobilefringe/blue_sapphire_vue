@@ -157,7 +157,6 @@
     mounted () {
       this.form_data.email = this.$route.query.email;
       $("#mce-EMAIL").val(this.form_data.email);
-      console.log("this.$route.query", this.$route.query);
     },
     watch : {
       $route () {

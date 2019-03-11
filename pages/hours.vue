@@ -13,7 +13,7 @@
             </div>
           </div>
           <div class="margin_30"></div>
-          <hr class="horizontal_div show_phone">
+          <hr class="horizontal_div regular_hours">
         </div>
         <div class="col-md-6 border_left">
           <h2>Holiday Hours</h2>

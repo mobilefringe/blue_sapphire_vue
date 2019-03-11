@@ -27,8 +27,8 @@
       </div>
     </div>
     <div class="container">
-      <div class="row feature_row">
-        <div v-for="(item, index) in featuredImageOne" :key="index" class="col no_padding">
+      <div class="row">
+        <div v-for="(item, index) in featuredImageOne" :key="index" class="col-md-6 no_padding">
           <div v-if="item.url">
             <a :href="item.url" class="">
               <img class="max-width" :src="item.image_url" :alt="item.name">
@@ -38,19 +38,14 @@
             <img class="max-width" :src="item.image_url" :alt="item.name">
           </div>
         </div>
-        <div class="col no_padding">
+        <div class="col-md-6 no_padding">
           <div class="col">
             <div v-if="featureContentOne" v-html="featureContentOne.body" class="home_page_content page_content"></div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col no_padding">
-          <div class="col">
-            <div v-if="featureContentTwo" v-html="featureContentTwo.body" class="home_page_content page_content"></div>
-          </div>
-        </div>
-        <div v-for="(item, index) in featuredImageTwo" :key="index" class="col no_padding">
+        <div v-for="(item, index) in featuredImageTwo" :key="index" class="col-md-6 order-md-2 no_padding">
           <div v-if="item.url">
             <a :href="item.url" class="">
               <img class="max-width" :src="item.image_url" :alt="item.name">
@@ -58,6 +53,11 @@
           </div>
           <div v-else >
             <img class="max-width" :src="item.image_url" :alt="item.name">
+          </div>
+        </div>
+        <div class="col-md-6 no_padding">
+          <div class="col">
+            <div v-if="featureContentTwo" v-html="featureContentTwo.body" class="home_page_content page_content"></div>
           </div>
         </div>
       </div>
@@ -118,8 +118,7 @@
           store.dispatch("getData", { resource: "feature_items" }),
           store.dispatch('LOAD_PAGE_DATA', { url: process.env.MM_HOST + "	/pages/cambridgecentre-home-feature-1.json"}),
           store.dispatch('LOAD_PAGE_DATA', { url: process.env.MM_HOST + "	/pages/cambridgecentre-home-feature-2.json"})
-          // store.dispatch("getData", { resource: "popups" }),
-          
+          // store.dispatch("getData", { resource: "popups" })
         ]);
         return { tempSEO: results[0].data.meta_data[0], featureContentOne: results[3].data, featureContentTwo: results[4].data };
       } catch (e) {
@@ -131,8 +130,6 @@
       if (this.tempSEO) {
         this.currentSEO = this.tempSEO;
       }
-      console.log("process.env.MM_HOST", process.env.MM_HOST)
-      console.log("featureContentOne", this.featureContentOne)
     },
     watch: {
       show_popup() {
@@ -145,8 +142,7 @@
     },
     computed: {
       ...mapGetters([
-        "property",
-        // "processedStores"
+        "property"
       ]),
       // currentPopup() {
       //   var popup = this.$store.state.popups;

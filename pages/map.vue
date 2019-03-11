@@ -74,13 +74,11 @@
     },
     watch: {
 			windowWidth: function() {
-        console.log("width", this.windowWidth)
 				if (this.windowWidth <= 768) {
 					this.mobileMap = true;
 				} else {
 					this.mobileMap = false;
         }
-        console.log("mobile map", this.mobileMap)
       }
     },
     mounted() {

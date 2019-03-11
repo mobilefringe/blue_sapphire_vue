@@ -23,12 +23,26 @@
           arrows: false,
           autoplay: true,
           autoplaySpeed: 0,
-          centerMode: true,
+          // centerMode: true,
           cssEase: "linear",
           dots: false,
           infinite: true,
           slidesToShow: 9,
           speed: 5000,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 5,
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 3,
+              }
+            } 
+          ]
         },
       }
     },

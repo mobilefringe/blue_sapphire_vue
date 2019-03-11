@@ -13,7 +13,7 @@
           <p v-if="currentJob.contact_phone" class="no_margin">Phone Number: {{ currentJob.contact_phone }}</p>
           <p v-if="currentJob.contact_email" class="no_margin">Email Address: {{ currentJob.contact_email }}</p>
           <p v-if="currentJob.contact_website" class="no_margin">Website: {{ currentJob.contact_website }}</p>
-          <p v-if="currentJob.message" class="no_margin">{{ currentJob.message }}</p>
+          <p v-if="currentJob.message" class="no_margin">Message: {{ currentJob.message }}</p>
         </div>
       </div>
     </div>

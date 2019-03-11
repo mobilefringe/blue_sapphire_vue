@@ -36,7 +36,6 @@
 			pageBanner() {
         var banner = this.findRepoByName("Inside Page Banner").images;
         if (banner) {
-          console.log("banner", banner)
           var inside_page_banner = banner[0];
           return inside_page_banner
         }

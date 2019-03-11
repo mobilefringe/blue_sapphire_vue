@@ -14,10 +14,10 @@
       </div>
       <div class="margin_30"></div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6">
           <mapplic-map id="store_details" ref="mapplic_ref" :height="358" :minimap= "false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale= "5" :storelist="mapStores" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
         </div>
-        <div class="col-md-6 border_left">
+        <div class="col-lg-6 border_left">
           <div id="store_details_container">
             <div v-if="currentStore.store_logo"  class="store_details_logo">
               <img :src="currentStore.store_logo" :alt="currentStore.name + ' Logo'" />
@@ -236,7 +236,6 @@
             // STORE HOURS
             var storeHours = [];
             var store_hours = this.currentStore.store_hours;
-            console.log("store_hours", store_hours)
             if (store_hours != null) {
               _.forEach(store_hours, function (value, key) {
                 var hours = vm.findHourById(value);

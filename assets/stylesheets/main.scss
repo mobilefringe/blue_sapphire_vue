@@ -37,10 +37,11 @@
 /* COLOUR VARIABLES */
 $primary: #e77983;
 $primary_opac: rgba(231, 121, 131, .8);
-$primary_shade: #5f4d3a;
+$primary_shade: #e04d59;
 $secondary: #6b6c70;
-$accent: #D4D4D4;
-
+$accent: #747474;
+$link: #2d6cb5;
+$link_hover: #285588;
 $store_box_height: 160px;
 $font: #4A4A4A;
 $font-accent: #5C5C5F;
@@ -84,13 +85,14 @@ h5 {
   line-height: 1.625rem;
   font-weight: 400;
 }
-// a {
-//     color: #000;
-//     transition: all 0.3s ease;
-//     &:hover {
-//         color: $primary;
-//     }
-// }
+a {
+    color: $link;
+    transition: all 0.3s ease;
+    &:hover {
+      color: $link_hover;
+      text-decoration: underline;
+    }
+}
 
 //#__nuxt {
 #__layout > div {
@@ -163,7 +165,7 @@ h5 {
 
 /* HEADER */
 #header {
-  margin-bottom: 120px;
+  margin-bottom: 148px;
 }
 .header {
   width: 100%;
@@ -232,7 +234,6 @@ h5 {
 .nav_header {
   padding: 16px 0;
   position: relative;
-  // z-index: 2;
   background-color: #FFF;
 }
 .nav_header .container {
@@ -241,7 +242,7 @@ h5 {
   align-items: center;
 }
 .logo_container {
-  width: calc(100% - 86%);
+  width: 75px;
   .logo {
     max-width: 100%;
   }
@@ -352,12 +353,17 @@ h5 {
 
 /* *** FOOTER *** */
 .footer_nav {
-  padding: 20px 0 52px 0;
+  padding: 20px 0;
   background: #F0F0F0;
   font-size: 0.875rem;
   line-height: 1.1875rem;
   a:hover {
     text-decoration: none;
+  }
+  .animated_btn {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .footer_center {
     border-left: 1px solid #979797;
@@ -435,7 +441,7 @@ h5 {
     margin: 0;
     font-size: 0.75rem;
     line-height: 1.25rem;
-    color: $font-accent;
+    color: #FFF;
     a {
       color: inherit;
     }
@@ -457,7 +463,13 @@ h5 {
   display: none;
   border: solid 1px $primary;
 }
-
+.footer_logos {
+  padding-top: 30px;
+  text-align: center;
+  img {
+    max-width: 150px;
+  }
+}
 /* HOME */
 .banner_container {
   position: relative;
@@ -559,7 +571,7 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:#fff;
+  color: $font;
   h1 {
     padding-right: 50px;
     display: inline-block;
@@ -595,7 +607,10 @@ h5 {
     border: none;
     background-color: $accent;
     font-family: $font-serif;
-    color: #000;
+    color: #FFF;
+    &:after {
+      background: #FFF;
+    }
   }
 }
 
@@ -639,11 +654,11 @@ h5 {
 } 
 .read_more {
   font-size: 1rem;
-  color: #4990e2;
-  text-decoration: underline;
+  color: $link;
   transition: all .1s ease;
   &:hover {
-    color: $primary;
+    color: $link_hover;
+    text-decoration: underline;
   }
 }
 .page_content {
@@ -652,11 +667,19 @@ h5 {
   }
   h3 {
     font-family: $font-serif;
-    color: $primary;
   }
   strong {
     font-weight: 700;
   }
+  a {
+    color: $link !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    &:hover {
+      color: $link_hover !important;
+      text-decoration: underline !important;
+    }
+}
 }
 .v-select {
   height: inherit;
@@ -676,7 +699,7 @@ h5 {
         margin-left: 0;
         margin-right: 0;
         margin-bottom: 4px;
-        width: 89%;
+        width: 100%;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -686,6 +709,7 @@ h5 {
         text-transform: uppercase;
         white-space: nowrap;
         overflow: hidden;
+        text-align: center;
         text-overflow: ellipsis;
         &:hover {
           cursor: pointer;
@@ -696,23 +720,22 @@ h5 {
           cursor: pointer;
         }
       }
-      .open-indicator {
-        top: 12px;
-        right: 20px;
-      }
-      .open-indicator:before {
-        border-color: #858C92;
-      }
+    }
+    .open-indicator {
+      top: 12px;
+      right: 20px;
+    }
+    .open-indicator:before {
+      border-color: $font !important;
     }
   }
   .dropdown-menu {
     z-index: 9 !important;
-    border: 1px solid #858C92 !important;
+    border: 1px solid $font !important;
     border-top: none !important; 
     border-radius: 0 !important;
     font-family: $font-sans;
     font-size: 0.875rem;
-    
     overflow-x: hidden;
     li {
       a {
@@ -724,11 +747,16 @@ h5 {
   }
   .dropdown-menu > .highlight > a {
     background: $primary !important;
+    color: $font !important;
   }
 }
 .animated_btn {
-  padding: 0 30px;
-  display: inline-block;
+  padding: 0 32px;
+  max-width: 180px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
   outline: none;
@@ -736,7 +764,8 @@ h5 {
   box-shadow: 0 0 1px rgba(0,0,0,0);
   border: none;
   background: $accent;
-  color: $primary;
+  font-family: $font-serif;
+  color: #FFF;
   transform: perspective(1px) translateZ(0);
   &:after {
     @include pseudo();
@@ -803,7 +832,10 @@ textarea.form-control {
   bottom: unset !important;
   left: unset !important;
 }
-
+.mapplic-popup-link {
+  background-color: $primary !important;
+  color: $font !important;
+}
 #store_details.mapplic-popup-link {
   display: none !important;
 }
@@ -820,18 +852,27 @@ textarea.form-control {
     margin: 0 10px;
     width: 200px;
     height: 40px;
-    border: 1px solid #858C92;
+    border: 1px solid $font;
     font-size: 0.875rem;
-    color: #858C92;
+    color: $font;
     text-align: center;
     transition: all 0.3s ease;
     &:hover {
-      background-color: #858C92;
+      background-color: $font;
       color: #FFF;
+      cursor: pointer;
+      .v-select .dropdown-toggle { 
+        .vs__selected-options .selected-tag {
+          color: #FFF;
+        }
+        .open-indicator:before {
+          border-color: #FFF !important
+        }
+      }
     }
   }
   .directory_btn.active {
-    background-color: #858C92;
+    background-color: $font;
     color: #FFF;
   }
 }
@@ -906,7 +947,7 @@ textarea.form-control {
       padding: 4px 0;
       width: 108px;
       font-size: 0.65rem;
-      color: #FFF;
+      color: $font;
       line-height: normal;
       letter-spacing: 0.6px;
       text-transform: uppercase;
@@ -954,14 +995,14 @@ textarea.form-control {
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
       font-size: 0.7rem;
-      color: #FFF;
+      color: $font;
       line-height: normal;
       letter-spacing: 0.6px;
       text-transform: uppercase;
       text-align: center;
       h4, p {
         margin: 0;
-        color: #FFF;
+        color: $font;
       }
     }
   }
@@ -977,7 +1018,7 @@ textarea.form-control {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: $primary;
+    color: $font;
     text-transform: uppercase;
     font-weight: 600;
     -webkit-font-smoothing: antialiased;
@@ -1006,9 +1047,23 @@ textarea.form-control {
 }
 .store_details_info {
   column-count: 2;
+  a:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
 }
 .store_details_highlight {
-  color: $primary;
+  position: relative;
+  color: $font;
+  &:after {
+    @include pseudo();
+    width: 100%;
+    height: 3px;
+    left: 50%;
+    bottom: -3px;
+    transform: translateX(-50%);
+    background-color: $primary;
+  }
 }
 .store_details_description {
   margin-bottom: 60px;
@@ -1043,13 +1098,12 @@ textarea.form-control {
 }
 .promo_dates {
   margin: 10px 0;
-  color: $primary;
 }
 .promo_desc {
   margin-bottom: 10px;
   font-size: 1.125rem;
   line-height: 1.25rem;
-  text-align: justify;
+  text-align: left;
   color: $font;
   p, p span, a {
     font-family: $font-sans !important;
@@ -1061,11 +1115,11 @@ textarea.form-control {
     font-family: $font-sans !important;
     font-size: inherit !important;
     line-height: inherit !important;
-    color: #4990e2 !important;
+    color: $link !important;
     text-decoration: underline !important;
     transition: all .1s ease;
     &:hover {
-      color: $primary;
+      color: $link_hover !important;
     }
   }
 }
@@ -1083,7 +1137,9 @@ textarea.form-control {
   justify-content: space-between;
 
 }
-
+.horizontal_div.regular_hours {
+  display: none;
+}
 /* JOBS */
 .jobs_store_name, .jobs_name {
   color: $font;
@@ -1124,21 +1180,48 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   margin: 0 0 20px 0;
   font-family: $font-serif;
 }
+
 @media (max-width: 1024px) {
-  // .logo_container {
-  //   width: 140px;
-  // }
+  .home_page_content {
+    max-height: 520px;
+  }
 }
+
+@media (min-width: 769px) and (max-width: 990px) {
+  .container {
+    max-width: 100%;
+  }
+  #primary_nav ul .menu_item {
+    padding: 0 10px;
+    min-width: 110px;
+  }
+}
+
 @media (max-width: 768px) {
+  h1 {
+    font-size: 1.625rem;
+  }
+  h2 {
+    font-size: 1.375rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
   .hidden_phone {
     display: none;
   }
   .show_phone {
     display: block;
   }
-  #header {
-    margin-bottom: 109px;
-  }
+  // #header {
+  //   margin-bottom: 109px;
+  // }
   .social_header .container {
     .hours_container {
       width: 40%;  
@@ -1147,9 +1230,9 @@ a.jobs_store_name:hover, a.jobs_name:hover {
       width: 60%;
     }
   }
-  .logo_container {
-    width: 155px;
-  }
+  // .logo_container {
+  //   width: 155px;
+  // }
   #menu-icon {
     width: 30px;
     height: 25px;
@@ -1222,7 +1305,7 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     width: 100vw;
     height: calc(100vh - 109px);
     position: absolute;
-    top: 18px;
+    top: 16px;
     left: 0;
     right: 0;
     overflow-y: scroll;
@@ -1288,9 +1371,9 @@ a.jobs_store_name:hover, a.jobs_name:hover {
       color: $primary;
     }
   }
-
   .footer_nav {
     .footer_center {
+      margin-top: 30px;
       border-left: none;
       border-right: none;
     }
@@ -1308,6 +1391,41 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   .filter_row {
     margin-bottom: 20px;
   }
+  .home_page_content {
+    max-height: 371px;
+  }
+  .newsletter_container {
+    padding: 60px 0;
+    flex-direction: column;
+    h1 {
+      margin-bottom: 20px;
+      padding-right: 0;
+    }
+  }
+  .stores-grid-item {
+    width: 25%;
+  }
+  .featured_logo_row .featured_logo_container {
+    height: 76px;
+  }
+  /* STORES */
+  .store_logo_container .store_tag {
+    width: 100%;
+    top: 0;
+    .store_tag_text {
+      width: 100%
+    }
+  }
+  .store_details_logo {
+    margin-top: 30px;
+  }
+  .store_details_info {
+    column-count: 1;
+  }
+  /* PROMOTIONS */
+  .promo_desc {
+    font-size: 1rem;
+  }
   .jobs_store_name, .jobs_name {
     margin: 0;
     p {
@@ -1319,14 +1437,39 @@ a.jobs_store_name:hover, a.jobs_name:hover {
       display: block;
     }
   }
+  /* HOURS */
+  .hours_div {
+    width: 90%;
+  }
+  .hours_div.holiday {
+    margin-bottom: 20px;
+    flex-direction: column;
+    line-height: 1.5rem;
+  }
+
 }
 
 @media (max-width: 480px) {
+  h1 {
+    font-size: 1.625rem;
+  }
+  h2 {
+    font-size: 1.375rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
   .show_phone {
     display: block;
   }
   #header {
-    margin-bottom: 148px;
+    margin-bottom: 176px;
   }
   .social_header .container {
     .hours_container {
@@ -1351,7 +1494,7 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     }
   }
   .logo_container {
-    width: 125px;
+    width: 65px;
   }
   #mobile_nav {
     height: calc(100vh - 148px);
@@ -1367,6 +1510,10 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   #instafeed {
     padding: 0;
   }
+  .footer_logos img {
+    margin-bottom: 20px;
+    max-width: 100px;
+  }
   .footer {
     padding: 10px 0;
     height: auto;
@@ -1377,6 +1524,31 @@ a.jobs_store_name:hover, a.jobs_name:hover {
       display: block;
     }
   }
+  .footer_logos {
+    .col-3 {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  /* HOME */
+  .home_page_content {
+    max-height: unset;
+  }
+  .featured_logo_row .featured_logo_container {
+    height: 115px;
+  }
+  /* STORES */
+  .directory_container {
+    margin-bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    .directory_btn {
+      margin-bottom: 30px;
+    }
+}
+  .stores-grid-item {
+    width: 50%;
+  }
   /* HOURS */
   .hours_div {
     width: 100%;
@@ -1386,6 +1558,9 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     flex-direction: column;
     line-height: 1.5rem;
 
+  }
+  .horizontal_div.regular_hours {
+    display: block;
   }
 }
 

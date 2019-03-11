@@ -28,64 +28,64 @@
         <div class="form-group row">
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('first_name')}">
             <label class="" for="first_name">First Name *</label>
-            <input v-model="form_data.first_name" v-validate="'required:true'" class="form-control" :class="{'input': true}" name="first_name" type="text" placeholder="" data-vv-delay="500" data-vv-as="first name" required>
+            <input id="first_name" v-model="form_data.first_name" v-validate="'required:true'" class="form-control" :class="{'input': true}" name="first_name" type="text" placeholder="" data-vv-delay="500" data-vv-as="first name" required>
             <span v-show="errors.has('first_name')" class="form-control-feedback">{{ errors.first('first_name') }}</span>
           </div>
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('last_name')}">
             <label class="" for="last_name">Last Name *</label>
-            <input v-model="form_data.last_name" v-validate="'required:true'" class="form-control" :class="{'input': true}" name="last_name" type="text" placeholder="" data-vv-delay="500" data-vv-as="last name" required>
+            <input id="last_name" v-model="form_data.last_name" v-validate="'required:true'" class="form-control" :class="{'input': true}" name="last_name" type="text" placeholder="" data-vv-delay="500" data-vv-as="last name" required>
             <span v-show="errors.has('last_name')" class="form-control-feedback">{{ errors.first('last_name') }}</span>
           </div>
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('email')}">
             <label class="" for="email">Email Address *</label>
-            <input v-model="form_data.email" v-validate="'required|email'" class="form-control" :class="{'input': true}" name="email" type="email" placeholder="" data-vv-delay="500" data-vv-as="email" required>
+            <input id="email" v-model="form_data.email" v-validate="'required|email'" class="form-control" :class="{'input': true}" name="email" type="email" placeholder="" data-vv-delay="500" data-vv-as="email" required>
             <span v-show="errors.has('email')" class="form-control-feedback">{{ errors.first('email') }}</span>
           </div>
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('phone')}" >
             <label class="" for="phone">Phone Number</label>
-            <input v-model="form_data.phone" class="form-control" :class="{'input': true}" name="phone" type="text" placeholder="" data-vv-delay="500" data-vv-as="phone"> <!-- v-validate="'required:true'" -->
+            <input id="phone" v-model="form_data.phone" class="form-control" :class="{'input': true}" name="phone" type="text" placeholder="" data-vv-delay="500" data-vv-as="phone"> <!-- v-validate="'required:true'" -->
             <span v-show="errors.has('phone')" class="form-control-feedback">{{ errors.first('phone') }}</span>
           </div>
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('street')}">
             <label class="" for="street">Address</label>
-            <input v-model="form_data.mailing_address" class="form-control" :class="{'input': true}" name="street" type="text" placeholder="" data-vv-delay="500" data-vv-as="street address"> <!-- v-validate="'required:true'" -->
+            <input id="street" v-model="form_data.mailing_address" class="form-control" :class="{'input': true}" name="street" type="text" placeholder="" data-vv-delay="500" data-vv-as="street address"> <!-- v-validate="'required:true'" -->
             <span v-show="errors.has('street')" class="form-control-feedback">{{ errors.first('street') }}</span>
           </div>
           <div class="form-input col-sm-6"  :class="{'has-error': errors.has('city')}">
             <label class="" for="city">City</label>
-            <input v-model="form_data.city" class="form-control" :class="{'input': true}" name="city" type="text" placeholder="" data-vv-delay="500" data-vv-as="city"> <!-- v-validate="'required:true'" -->
+            <input id="city" v-model="form_data.city" class="form-control" :class="{'input': true}" name="city" type="text" placeholder="" data-vv-delay="500" data-vv-as="city"> <!-- v-validate="'required:true'" -->
             <span v-show="errors.has('city')" class="form-control-feedback">{{ errors.first('city') }}</span>
           </div>
           <div class="form-input col-sm-6 " :class="{'has-error': errors.has('postal')}">
             <label class="" for="postal">Postal Code</label>
-            <input v-model="form_data.postal_code" class="form-control" :class="{'input': true}" name="postal" type="text" placeholder="" data-vv-delay="500" data-vv-as="postal code"> <!-- v-validate="'required:true'" -->
+            <input id="postal" v-model="form_data.postal_code" class="form-control" :class="{'input': true}" name="postal" type="text" placeholder="" data-vv-delay="500" data-vv-as="postal code"> <!-- v-validate="'required:true'" -->
             <span v-show="errors.has('postal')" class="form-control-feedback">{{ errors.first('postal') }}</span>
           </div>
           <div class="form-input col-sm-6" :class="{'has-error': errors.has('birthday')}" >
             <label class="" for="birthday">Birthday *</label>
-            <input v-model="form_data.birthday" class="form-control" v-validate="'required|date_format:MM/DD/YYYY'" :class="{'input': true}" name="birthday" type="text" placeholder="MM/DD/YYYY" data-vv-delay="500" data-vv-as="birthday">
+            <input id="birthday" v-model="form_data.birthday" class="form-control" v-validate="'required|date_format:MM/DD/YYYY'" :class="{'input': true}" name="birthday" type="text" placeholder="MM/DD/YYYY" data-vv-delay="500" data-vv-as="birthday">
             <span v-show="errors.has('birthday')" class="form-control-feedback">{{ errors.first('birthday') }}</span>
           </div>
         </div>
         <div class="form-group row">
-          <div class="form-input col-sm-12 col-md-6" :class="{'has-error': errors.has('validate')}">
+          <div class="form-input col-md-12 col-lg-6" :class="{'has-error': errors.has('validate')}">
             <label class="" for="validate">Enter the following number in the field below to validate: {{ correctValNum }}</label> 
-            <input v-model="validaNum" v-validate="'required|numeric|min:6|max:6'" class="form-control" :class="{'input': true}" name="validate" type="text" placeholder="" data-vv-delay="500" data-vv-as="validation" required>
+            <input id="validate" v-model="validaNum" v-validate="'required|numeric|min:6|max:6'" class="form-control" :class="{'input': true}" name="validate" type="text" placeholder="" data-vv-delay="500" data-vv-as="validation" required>
             <span v-show="errors.has('validate')" class="form-control-feedback">{{ errors.first('validate') }}</span>
             <span v-if="validaNum.length === 6 && validaNum !== correctValNum && errors.first('validate') == null" class="form-control-feedback" :class="{shake_element : validNumError}">Please enter correct number</span>
           </div>
         </div>
         <div class="form-group row">
           <div class="form-input col-sm-12" :class="{'has-error': errors.has('agree_newsletter')}">
-            <label class="checkbox">
-              <input name="agree_newsletter" type="checkbox" v-model="form_data.newsletter">
+            <label class="checkbox" for="agree_newsletter">
+              <input id="agree_newsletter" name="agree_newsletter" type="checkbox" v-model="form_data.newsletter">
               Yes, I would like to receive ongoing communications related to promotions, events, and special announcements from {{property.name}}.
             </label>
           </div>
           <div class="form-input col-sm-12">
             <label class="checkbox">
               <input name="agree_terms" required type="checkbox" >
-                I agree to the <a href = "/pages/eastgate-contest-rules-and-regulations" target="_blank"><u> Contest Rules & Regulations</u></a> and read the <a href="" target="_blank"><u>Privacy Policy</u></a>.
+                I agree to the <a href = "/pages/cambridgecentre-contest-rules-regulations" target="_blank"><u> Contest Rules & Regulations</u></a> and read the <a href="https://www.morguard.com/privacy" target="_blank"><u>Privacy Policy</u></a>.
             </label>
           </div>
           <div class="form-input col-sm-12">
@@ -181,14 +181,12 @@
             let errors = this.errors;
             this.validNumError = false;
             
-          //   // Format contest entry for MM
+            // Format contest entry for MM
             var contest_entry = {};
             contest_entry.contest = this.form_data;
-            console.log("contest entry", contest_entry.contest)
             var vm = this;
             var host_name = this.property.mm_host.replace("http:", "");
             var url = host_name + "/contests/" + this.currentContest.slug + "/create_js_entry";
-            console.log("this.currentContest.slug", this.currentContest.slug)
             $.ajax({
               url: url,
               type: "POST",

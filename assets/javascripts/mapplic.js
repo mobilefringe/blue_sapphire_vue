@@ -76,13 +76,13 @@ var Mapplic = function (element) {
 
       // Construct
       this.el = $('<div></div>').addClass('mapplic-tooltip');
-      this.close = $('<a></a>').addClass('mapplic-tooltip-close').attr('href', '#').appendTo(this.el);
+      this.close = $('<a aria-labledby="Close"><span style="display: none;">Close</span></a>').addClass('mapplic-tooltip-close').attr('href', '#').appendTo(this.el);
       this.close.on('click touchend', function (e) {
         e.preventDefault();
         self.hideLocation();
         if (!self.o.zoom || self.o.zoomoutclose) self.moveTo(0.5, 0.5, self.fitscale, 400, 'easeInOutCubic');
       });
-      if (this.tooltipthumb) this.thumbnail = $('<img>').addClass('mapplic-tooltip-thumbnail').hide().appendTo(this.el);
+      if (this.tooltipthumb) this.thumbnail = $('<img alt="Store Logo">').addClass('mapplic-tooltip-thumbnail').hide().appendTo(this.el);
       this.content = $('<div></div>').addClass('mapplic-tooltip-content').appendTo(this.el);
       this.title = $('<h4></h4>').addClass('mapplic-tooltip-title').appendTo(this.content);
       this.desc = $('<div></div>').addClass('mapplic-tooltip-description').appendTo(this.content);
@@ -648,7 +648,7 @@ var Mapplic = function (element) {
       if (!self.o.clearbutton) this.el.css('bottom', '0');
 
       // Zoom in button
-      this.zoomin = $('<a></ha>').attr('href', '#').addClass('mapplic-zoomin-button').appendTo(this.el);
+      this.zoomin = $('<a aria-labeledby="Zoom In"><span style="display: none;">Zoom In</span></a>').attr('href', '#').addClass('mapplic-zoomin-button').appendTo(this.el);
       this.zoomin.on('click touchstart', function (e) {
         e.preventDefault();
 
@@ -662,7 +662,7 @@ var Mapplic = function (element) {
       });
 
       // Zoom out button
-      this.zoomout = $('<a></ha>').attr('href', '#').addClass('mapplic-zoomout-button').appendTo(this.el);
+      this.zoomout = $('<a aria-labeledby="Zoom Out"><span style="display: none;">Zoom Out</span></a>').attr('href', '#').addClass('mapplic-zoomout-button').appendTo(this.el);
       this.zoomout.on('click touchstart', function (e) {
         e.preventDefault();
 
@@ -760,7 +760,7 @@ var Mapplic = function (element) {
           case 'jpeg':
           case 'png':
           case 'gif':
-            $('<img>').attr('src', source).addClass('mapplic-map-image').appendTo(layer);
+            $('<img alt="Centre Map">').attr('src', source).addClass('mapplic-map-image').appendTo(layer);
             break;
 
             // Vector format

@@ -2,8 +2,8 @@ const pkg = require('./package')
 
 const webpack = require('webpack')
 const axios = require('axios')
-const API_URL = "https://mallmaverick.com/api/v4/cornwall"
-const MM_HOST = "https://cornwall.mallmaverick.com"
+const API_URL = "https://mallmaverick.com/api/v4/cambridgecentre"
+const MM_HOST = "https://cambridgecentre.mallmaverick.com"
 
 module.exports = {
   mode: 'spa',
@@ -90,17 +90,16 @@ plugins: [
   sitemap: {
     generate: true,
     routes() {
-      return axios.get(API_URL + '/seo.json')
-        .then(res => res.data.meta_data.filter(md => { 
-          if (md.path != null && md.path != undefined) return true 
-        }).map(md => md.path).sort().map((currRoute) => {
-          return {  
-            url: currRoute,
-            changefreq: 'daily',
-            priority: 1,
-            lastmodISO: new Date().toISOString()
-          }
-        }))
+      return axios.get(API_URL + '/seo.json').then(res => res.data.meta_data.filter(md => { 
+        if (md.path != null && md.path != undefined) return true 
+      }).map(md => md.path).sort().map((currRoute) => {
+        return {  
+          url: currRoute,
+          changefreq: 'daily',
+          priority: 1,
+          lastmodISO: new Date().toISOString()
+        }
+      }));
     }
   },
 

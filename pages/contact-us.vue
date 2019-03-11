@@ -4,11 +4,7 @@
     <div class="container margin_30">
       <iframe class="margin_30" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2899.32425251166!2d-80.32201808451613!3d43.39115167913113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b883315d65e15%3A0xdd9962d43d55419b!2sCambridge+Centre!5e0!3m2!1sen!2sca!4v1551294536521" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
       <div class="row">
-        <div class="col-md-6">
-          <div v-if="currentPage" v-html="currentPage.body" class="page_content"></div>
-          <hr class="horizontal_div show_phone">
-        </div>
-        <div class="col-md-6 border-left">
+        <div class="col-md-6 order-md-2 order-lg-2 border-left">
           <h2 class="margin_30">Contact us with your questions, comments, or for more information.</h2>
           <transition name="custom-classes-transition" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
             <div>
@@ -26,13 +22,13 @@
           </transition> 
           <form id="contact-us-form" class="form-horizontal" action="form-submit" v-on:submit.prevent="validateBeforeSubmit">
             <div class="row">
-              <div class="form-input col-sm-6 col-xs-12" :class="{'has-error': errors.has('first_name')}">
+              <div class="form-input col-lg-6 col-md-12" :class="{'has-error': errors.has('first_name')}">
                 <label class="" for="first_name">First Name *</label>
                 <input id="first_name" v-model="form_data.first_name" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="first_name" data-vv-as="First Name"
                   type="text" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('firts_name')" class="form-control-feedback">{{ errors.first('first_name') }}</span>
               </div>
-              <div class="form-input col-sm-6 col-xs-12" :class="{'has-error': errors.has('last_name')}">
+              <div class="form-input col-lg-6 col-md-12" :class="{'has-error': errors.has('last_name')}">
                 <label class="" for="last_name">Last Name *</label>
                 <input id="last_name" v-model="form_data.last_name" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="last_name" data-vv-as="Last Name"
                   type="text" data-vv-delay="1000" placeholder="" required>
@@ -75,7 +71,11 @@
                 <button class="animated_btn" type="submit" :disabled="formSuccess">Submit</button>
               </div>
             </div>
-          </form> 
+          </form>
+          <hr class="horizontal_div regular_hours"> 
+        </div>
+        <div class="col-md-6">
+          <div v-if="currentPage" v-html="currentPage.body" class="page_content"></div>
         </div>
       </div>
     </div>
