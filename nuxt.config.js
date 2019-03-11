@@ -106,9 +106,10 @@ plugins: [
   /* Build configuration */
   build: {
     /* You can extend webpack config here */
-    extend(config, ctx) {
-      
+    extend(config, ctx) {      
     },
+
+
     plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
@@ -117,6 +118,7 @@ plugins: [
         // ...etc.
       })
     ],
-    vendor: ['axios', 'jquery', 'lodash', 'fuse.js', 'moment', 'moment-timezone', 'vee-validate', 'vue-slick', 'vue-social-sharing', 'smoothscroll-polyfill', 'vue-select', 'es6-shim']
+    vendor: ['axios', 'jquery', 'lodash', 'fuse.js', 'moment', 'moment-timezone', 'vee-validate', 'vue-slick', 
+      'vue-social-sharing', 'smoothscroll-polyfill', 'vue-select', 'es6-shim', 'babel-polyfill', 'whatwg-fetch']
   }
 }

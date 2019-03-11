@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import moment from 'moment';
 import tz from 'moment-timezone';
+import 'whatwg-fetch';
+
 
 Vue.mixin({
   methods: {

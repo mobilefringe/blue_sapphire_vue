@@ -35,9 +35,17 @@
     "vue-masonry": "^0.11.7",
     "vue-select": "^2.5.1",
     "vue-slick": "^1.1.15",
-    "vue-social-sharing": "^2.4.2"
+    "vue-social-sharing": "^2.4.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-preset-vue-app": "^2.0.0",
     "cross-env": "^5.2.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "2.6.2",
