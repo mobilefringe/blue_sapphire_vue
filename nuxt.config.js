@@ -109,7 +109,6 @@ plugins: [
     extend(config, ctx) {      
     },
 
-
     plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
