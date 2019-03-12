@@ -77,26 +77,6 @@
                   </div>
                 </li>
               </ul>
-						    <!-- <div class="mobile_nav_content visible_phone">
-                                <div class="mobile_address_container center">
-                                    <hr>
-                                    <a href="https://goo.gl/maps/RJ5dV8dxP1y" target="_blank">
-                                        <p class="property_address">{{ property.address1 }},<br>{{ property.city }}, {{ property.province_state }}</p>
-                                    </a>
-                                    <a :href="'tel:' + property.contact_phone" >
-                                        <h5>{{ property.contact_phone }}</h5>
-                                    </a>
-                                    <hr>
-                                </div>
-                                <div class="social_icons center">
-                                    <span v-for="item in social_media">
-                                        <a :href="item.url" target="_blank">
-                                            <p class="accessibility">{{ item.name }}</p>
-                                            <i :class="item.iconClass" aria-hidden="true"></i>
-                                        </a>
-                                    </span>
-                                </div>  -->
-							<!-- </div> -->
 						</nav>
           </transition>
         </div>
@@ -134,17 +114,6 @@
         showModal: false,
       }
     },
-    // async asyncData({ store, route }) {
-    //   try {
-    //     let results = await Promise.all([
-    //       store.dispatch("getData", { resource: "events" }),
-    //       store.dispatch("getData", { resource: "promotions" }),
-    //     ]);
-    //     return { socialFeed: results[0].data }
-    //   } catch (e){
-    //     console.log (e.message);
-    //   }
-    // },
 		created() {
 			this.$nextTick(function() {
 				window.addEventListener('resize', this.getWindowWidth);
@@ -154,7 +123,8 @@
 		},
 		watch: {
 			$route (to, from) {
-				this.navUp = false;
+        this.navUp = false;
+        this.showMenu = false;
 			},
 			windowWidth: function() {
 				if (this.windowWidth <= 768) {
