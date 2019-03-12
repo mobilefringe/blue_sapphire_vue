@@ -1574,9 +1574,12 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     .directory_btn {
       margin-bottom: 30px;
     }
-}
+  }
   .stores-grid-item {
     width: 50%;
+  }
+  #store_details {
+    padding: 0 10px;
   }
   /* HOURS */
   .hours_div {
