@@ -1404,6 +1404,10 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   .filter_row {
     margin-bottom: 20px;
   }
+  /* HOME */
+  .feature_container .container {
+    padding: 0;
+  }
   .home_page_content {
     max-height: 371px;
   }
@@ -1415,13 +1419,13 @@ a.jobs_store_name:hover, a.jobs_name:hover {
       padding-right: 0;
     }
   }
+  /* STORES */
   .stores-grid-item {
     width: 25%;
   }
   .featured_logo_row .featured_logo_container {
     height: 76px;
   }
-  /* STORES */
   .store_logo_container .store_tag {
     width: 100%;
     top: 0;
@@ -1544,6 +1548,15 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     }
   }
   /* HOME */
+  .banner_container .banner_image {
+    height: 160px;
+  }
+  .feature_container .container {
+    flex-direction: column;
+    .width_30 {
+      width: 100%;
+    }
+  }
   .home_page_content {
     max-height: unset;
   }
