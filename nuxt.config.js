@@ -19,7 +19,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/vue2-animate@1.0.4/dist/vue2-animate.min.css' }
+      { rel: 'stylesheet', href: 'https://www.mallmaverick.com/system/site_images/photos/000/049/884/original/favicon-32x32.png?1552404136' }
     ]
   },
 

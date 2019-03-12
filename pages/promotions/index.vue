@@ -84,7 +84,8 @@
       ...mapGetters([
         'property',
         'timezone',
-        'processedPromos'
+        'processedPromos',
+        'findRepoByName'
       ]),
       promotions() {
         var promotions = this.processedPromos;
@@ -96,7 +97,12 @@
           var showOnWebDate = moment.tz(value.show_on_web_date, timezone).format();
           if (today >= showOnWebDate) {
             if (_.includes(value.promo_image_url_abs, 'missing')) {
-              value.image_url = "https://placehold.it/700x410/757575";
+              var default_img = vm.defaultImage;
+              if (default_img) {
+                value.image_url = default_img.image_url;
+              } else {
+                value.image_url = "https://via.placeholder.com/700x410/888888/FFFFFF/?text=No+Image";
+              }
             } else {
               value.image_url = value.promo_image_url_abs;
             }
@@ -118,6 +124,13 @@
         });
         _.sortBy(temp_promo, [function(o) { return o.start_date; }]);
         return temp_promo;
+      },
+      defaultImage() {
+        var repo = this.findRepoByName("Default Image").images;
+        if (repo) {
+          var default_img = repo[0];
+          return default_img
+        }
       }
     },
     methods: {

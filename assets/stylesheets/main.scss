@@ -637,6 +637,19 @@ a {
         background-color: #000;
       }
     }
+    .inside_page_breadcrumb {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translate(0, -50%);
+      color: #000;
+      a {
+        color: inherit;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
 .details_title {

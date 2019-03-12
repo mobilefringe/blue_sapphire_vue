@@ -43,14 +43,14 @@
                 <span v-show="errors.has('email')" class="form-control-feedback">{{ errors.first('email') }}</span>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('subject')}">
                 <label class="" for="subject">Subject *</label>
                 <input id="subject" v-model="form_data.subject" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="subject" data-vv-as="Subject"
                   type="text" data-vv-delay="1000" placeholder="" required>
                 <span v-show="errors.has('firts_name')" class="form-control-feedback">{{ errors.first('subject') }}</span>
               </div>
-            </div>
+            </div> -->
             <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('message')}">
                 <label class="" for="message">Message *</label>
@@ -142,10 +142,8 @@
     },
     computed: {
       ...mapGetters([
-        'property',
-
-      ]),
-      
+        'property'
+      ])
     },
     methods: {
       validateBeforeSubmit() {
@@ -154,15 +152,16 @@
             let send_data = new FormData();
             // send_data.append("mailto", this.property.contact_email);
             send_data.append("mailto", "caitlin@mobilefringe.com");
+            send_data.append("from_email", this.form_data.email);
             send_data.append("subject", "You've Recieved a Message from " + this.property.name + " Website.");
             send_data.append("custom[First Name]", this.form_data.first_name);
             send_data.append("custom[Last Name]", this.form_data.last_name);
             send_data.append("custom[Email]", this.form_data.email);
-            send_data.append("custom[Subject]", this.form_data.subject);
+            // send_data.append("custom[Subject]", this.form_data.subject);
             send_data.append("custom[Message]", this.form_data.message);
             
             let vm = this;
-            fetch("//www.mallmaverick.com/custom_email.js", {
+            fetch("//www.mallmaverickstaging.com/custom_email.js", {
               method: "post",
               body: send_data
             })
@@ -171,6 +170,10 @@
             })
             .catch(error => {
               vm.formError = true;
+            });
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
             });
           }
         })

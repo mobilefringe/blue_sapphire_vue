@@ -1,6 +1,5 @@
 <template>
-  <!-- <div class="inside_page_banner" v-if="pageBanner" v-bind:style="{ backgroundImage: 'url(' + pageBanner.image_url + ')' }"> -->
-  <div class="inside_page_banner" v-bind:style="{ backgroundImage: 'url(https://via.placeholder.com/1920x144)' }">
+  <div class="inside_page_banner" v-if="pageBanner" v-bind:style="{ backgroundImage: 'url(' + pageBanner.image_url + ')' }">
     <div class="container">
       <h1 v-if="page_name" class="inside_page_title">{{ page_name }}</h1>
     </div>
@@ -12,11 +11,6 @@
 	
   export default {
     props: ["page_name"],
-    data: function data() {
-      return {
-				// pageBanner: null,	
-      }
-    },
 		beforeRouteUpdate(to, from, next) {
       this.$nextTick(function() {
         this.pageBanner;
@@ -24,7 +18,7 @@
       next();
     },
 		mounted() {
-			// this.pageBanner;
+      this.pageBanner;
     },
     computed: {
       ...mapGetters([
@@ -39,7 +33,7 @@
           var inside_page_banner = banner[0];
           return inside_page_banner
         }
-      }
-		}
+      },
+    }
   }
 </script>

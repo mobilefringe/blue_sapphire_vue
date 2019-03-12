@@ -1,6 +1,6 @@
 <template>
   <div>
-    <inside-page-banner :page_name="page_name" />
+    <inside-page-banner v-if="currentEvent" :page_name="page_name" />
     <div class="container margin_30">
       <div class="row"> 
         <div class="col-md-12">
@@ -8,7 +8,7 @@
           <h5 v-if="isMultiDay(currentEvent, timezone)" class="promo_dates">{{ currentEvent.start_date | moment("MMMM D", timezone) }} - {{ currentEvent.end_date | moment("MMMM D", timezone) }}</h5>
           <h5 v-else class="promo_dates">{{ currentEvent.start_date | moment("MMMM D", timezone) }}</h5>
           <hr class="horizontal_div">
-          <img class="promo_details_img max-width" :src="currentEvent.image_url" :alt="currentEvent.name" />
+          <img v-if="currentEvent.image_url" class="promo_details_img max-width" :src="currentEvent.image_url" :alt="currentEvent.name" />
           <div class="promo_desc details" v-html="currentEvent.rich_description"></div>
         </div>
       </div>
@@ -52,8 +52,8 @@
       return {
         tempSEO: null,
         currentSEO: {},
-        page_name: "",
         currentEvent: {},
+        page_name: ""
       }
     },
     async asyncData({ store, params, route }) {
@@ -94,10 +94,11 @@
           if (this.currentEvent === null || this.currentEvent === undefined){
             this.$router.replace({ name: 'events'});
           } else {
-            this.page_name = this.property.name;
-
+            var property = this.property
+            this.page_name = property.name;
+            
             if (_.includes(this.currentEvent.event_image_url_abs, 'missing')) {
-              this.currentEvent.image_url = "https://codecloud.cdn.speedyrails.net/sites/5bbfac0c6e6f6411b3040000/image/png/1546551307522/eventplaceholder2@2x.png"
+              this.currentEvent.image_url = null;
             } else {
               this.currentEvent.image_url = this.currentEvent.event_image_url_abs;
             }
