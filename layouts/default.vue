@@ -55,7 +55,7 @@
               },
               {
                 name: "Awards",
-                href: "/pages/cambridgecentre-awards"
+                href: "/awards"
               },
               {
                 name: "History",

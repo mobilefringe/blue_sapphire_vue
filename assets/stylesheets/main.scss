@@ -1185,6 +1185,15 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   margin-right: 5px;
 }
 
+/* AWARDS */
+.award_row {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  img {
+    max-width: 150px;
+  }
+}
 /* SEARCH RESULTS */
 .result_container {
   margin-bottom: 30px;
@@ -1593,6 +1602,13 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   }
   .horizontal_div.regular_hours {
     display: block;
+  }
+  .award_row {
+    margin-bottom: 40px;
+    h3 {
+      margin-top: 10px;
+      text-align: center;
+    }
   }
 }
 
