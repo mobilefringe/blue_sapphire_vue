@@ -1468,16 +1468,16 @@ a.jobs_store_name:hover, a.jobs_name:hover {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.625rem;
-  }
-  h2 {
     font-size: 1.375rem;
   }
-  h3 {
+  h2 {
     font-size: 1.25rem;
   }
-  h4 {
+  h3 {
     font-size: 1.125rem;
+  }
+  h4 {
+    font-size: 1rem;
   }
   h5 {
     font-size: 1rem;
@@ -1562,6 +1562,9 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   }
   .featured_logo_row .featured_logo_container {
     height: 115px;
+  }
+  .newsletter_container .newsletter_input {
+    width: 325px;
   }
   /* STORES */
   .directory_container {
