@@ -1202,7 +1202,24 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   margin: 0 0 20px 0;
   font-family: $font-serif;
 }
-
+.store_search_image {
+  .no_logo {
+    height: auto;
+    border: 1px solid $primary;
+    .store_details_name {
+      margin: 0;
+      padding: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      width: 100%;
+      color: $font;
+      text-align: center;
+    }
+  }
+}
 @media (max-width: 1024px) {
   .home_page_content {
     max-height: 520px;

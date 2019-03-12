@@ -86,11 +86,11 @@
             ]
           },
           {
-            name: "Contact Us",
+            name: "Contact",
             href: "#",
             sub_menu: [
               {
-                name: "Contact",
+                name: "Contact Us",
                 href: "/contact-us"
               },
               {

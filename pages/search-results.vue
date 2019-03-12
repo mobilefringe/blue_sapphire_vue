@@ -9,14 +9,14 @@
         <div class="col-sm-12">
           <div v-for="(result,index) in searchResultsList" :key="index">
             <div class="row result_container">
-              <div v-if="result.is_store" class="col-sm-2 store_details_image center-block">
+              <div v-if="result.is_store" class="col-sm-2 store_search_image center-block">
                 <div v-if="checkMissingImage(result)">
                   <div class="no_logo">
                     <img class="max-width" src="//codecloud.cdn.speedyrails.net/sites/5b88438d6e6f641e8d3c0000/image/png/1536092029690/transparent_logo.png" alt="">
-                    <p class="store_details_name">
+                    <h5 class="store_details_name">
                       <span v-if="result.store_front_url_abs">{{result.name}}</span>
                       <span v-else>{{ result.store.name }}</span>
-                    </p>
+                    </h5>
                   </div>    
                 </div> 
                 <div v-else>
@@ -25,7 +25,7 @@
                 </div>
               </div>
               <div v-else class="col-sm-2 store_details_image center-block">
-                <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/044/637/original/default_logo.png?1539618404" alt=""/>    
+                <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/774/original/cambridge_centre.png?1552075136" :alt="property.name + ' Logo'"/>    
               </div>
               <div class="col-sm-10 search_result_content">
                 <h3 class="search_results_name">{{ result.name }}</h3>
@@ -142,8 +142,8 @@
         }
       },
       checkMissingImage(result) {
-        if (result.store) {
-          return _.includes(result.store.store_front_url_abs, "missing");
+        if (_.includes(result.store_front_url_abs, "missing")) {
+          return true
         } else {
           return false;
         }
