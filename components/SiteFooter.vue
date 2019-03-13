@@ -42,16 +42,24 @@
         </div>
         <div class="row footer_logos">
           <div class="col-3">
-            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/774/original/cambridge_centre.png?1552075136" alt="Cambridge Centre Logo" />
+            <router-link to="/">
+              <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/774/original/cambridge_centre.png?1552075136" alt="Cambridge Centre Logo" />
+            </router-link>
           </div>
           <div class="col-3">
-            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/773/original/morguard.png?1552075127" alt="Morguard Logo" />
+            <a href="https://www.morguard.com/" target="_blank">
+              <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/773/original/morguard.png?1552075127" alt="Morguard Logo" />
+            </a>
           </div>
           <div class="col-3">
-            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/772/original/silver_award.png?1552075121" alt="" />
+            <a href="https://www.morguard.com/news-knowledge/posts/cse2017-silverwin" target="_blank">
+              <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/772/original/silver_award.png?1552075121" alt="Canada's Safest Employers - Silver Medal Winner" />
+            </a>
           </div>
           <div class="col-3">
-            <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/771/original/ice_centre_logo.png?1552075118" alt="" />
+            <a href="https://www.cambridgeicecentre.com/" target="_blank">
+              <img class="max-width" src="https://www.mallmaverick.com/system/site_images/photos/000/049/771/original/ice_centre_logo.png?1552075118" alt="Cambridge Ice Centre Logo" />
+            </a>
           </div>
         </div>
       </div>
