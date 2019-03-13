@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col directory_container">
-          <div class="directory_btn caps active">Alphabetical</div>
+          <div class="directory_btn caps" @click="filterByCategory()">Alphabetical</div>
           <div class="directory_btn">
             <v-select v-model="selectedCategory" :options="categorySelect" :searchable="false" :on-change="filterByCategory" placeholder="Categories" class="category-select" id="selectByCat"></v-select>
           </div>
@@ -175,6 +175,7 @@
 
         if (category_id == "All") {
           this.filteredStores = this.allStores;
+          this.selectedCategory = "Categories";
         } else {
           var find = this.findCategoryById;
           var filtered = _.filter(this.allStores, function(o) {
@@ -183,10 +184,10 @@
           this.filteredStores = filtered;
         }
 
-        var el = document.getElementById("selectByCat");
-        if (el) {
-          el.classList.remove("open");
-        }
+        // var el = document.getElementById("selectByCat");
+        // if (el) {
+        //   el.classList.remove("open");
+        // }
       }
     }
   };
