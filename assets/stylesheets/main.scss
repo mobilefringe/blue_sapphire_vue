@@ -1592,6 +1592,15 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   .newsletter_container .newsletter_input {
     width: 325px;
   }
+  /* INSIDE PAGE */
+  .inside_page_banner .container .inside_page_title {
+    color: #FFF;
+    text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.6);
+    &:after {
+      background-color: #FFF;
+      box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.6);
+    }
+  }
   /* STORES */
   .directory_container {
     margin-bottom: 0;

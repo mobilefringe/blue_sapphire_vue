@@ -48,7 +48,7 @@
         </div>
 		  </div>
       <div class="page_container text-left no_search_results margin_30" v-else> 
-        <h3>Sorry, there are no search results. Please try a different query.</h3>
+        <h3>Sorry, there are no results that match your query. Please try again.</h3>
       </div>
     </div>
 	</div>

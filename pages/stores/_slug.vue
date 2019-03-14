@@ -229,9 +229,9 @@
             }
 
             // STORE WEBSITE 
-            // if (this.currentStore.website) {
-            //   this.currentStore.website = "http://" + this.currentStore.website
-            // }
+            if (this.currentStore.website) {
+              this.currentStore.website = "http://" + this.currentStore.website;  
+            }
 
             // STORE HOURS
             var storeHours = [];
