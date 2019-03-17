@@ -1,15 +1,15 @@
 <template>
   <div> <!-- template will not render without an outer container -->
     <inside-page-banner :page_name="page_name" />
-
     <div class="container">
       <div class="row">
         <div class="col directory_container">
-          <div class="directory_btn caps" @click="filterByCategory()">Alphabetical</div>
+          <div id="alphaSort" class="directory_btn caps" @click="filterByCategory()">Alphabetical</div>
           <div class="directory_btn">
-            <v-select v-model="selectedCategory" :options="categorySelect" :searchable="false" :on-change="filterByCategory" placeholder="Categories" class="category-select" id="selectByCat"></v-select>
+            <v-select v-model="selectedCategory" :options="categorySelect" :searchable="false" :on-change="filterByCategory" placeholder="Categories" class="category-select" id="selectByCatDesktop"></v-select>
+            <v-select v-model="selectedCategoryMobile" :options="categorySelectMobile" :searchable="false" :on-change="filterByCategory" placeholder="Sort By" class="category-select" id="selectByCatMobile"></v-select>
           </div>
-          <div>
+          <div id="centreMap">
             <router-link to="/map"> 
               <div class="directory_btn caps">Centre Map</div>
             </router-link>
@@ -97,6 +97,7 @@
         currentSEO: {},
         page_name: "Store Directory",
         selectedCategory: "Categories",
+        selectedCategoryMobile: "Sort By",
         filteredStores: null
       };
     },
@@ -162,12 +163,19 @@
         cats = _.map(cats, "name");
         cats.unshift("Categories");
         return cats;
+      },
+      categorySelectMobile() {
+        var vm = this;
+        var cats = _.filter(this.processedCategories, function(o) { return o.store_ids !== null; });
+        cats = _.map(cats, "name");
+        cats.unshift("Alphabetical");
+        return cats;
       }
     },
     methods: {
       filterByCategory(value) {
         var category_id = value;
-        if (category_id == "Categories" || category_id == null || category_id == undefined) {
+        if (category_id == "Categories" || category_id == "Sort By" || category_id == null || category_id == undefined) {
           category_id = "All";
         } else {
           category_id = this.findCategoryByName(category_id).id;
@@ -184,10 +192,10 @@
           this.filteredStores = filtered;
         }
 
-        // var el = document.getElementById("selectByCat");
-        // if (el) {
-        //   el.classList.remove("open");
-        // }
+        var el = document.getElementById("selectByCat");
+        if (el) {
+          el.classList.remove("open");
+        }
       }
     }
   };

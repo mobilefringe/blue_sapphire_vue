@@ -123,7 +123,7 @@
             temp_event.push(value);
           }
         });
-        _.sortBy(temp_event, [function(o) { return o.start_date; }]);
+        temp_event = _.sortBy(temp_event, [function(o) { return o.end_date; }]);
         return temp_event;
       },
       defaultImage() {

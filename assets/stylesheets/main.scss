@@ -562,8 +562,7 @@ a {
 }
 .home_page_content {
   margin-top: 10px;
-  padding-bottom: 10px;
-  max-height: 592px;
+  max-height: 618px;
   overflow-y: scroll;
 }
 .newsletter_container {
@@ -883,6 +882,9 @@ textarea.form-control {
         }
       }
     }
+    #selectByCatMobile {
+      display: none;
+    }
   }
   .directory_btn.active {
     background-color: $font;
@@ -1096,7 +1098,7 @@ textarea.form-control {
   max-height: 205px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center left;
   overflow: hidden;
   .promo_img {
     max-width: 100%;
@@ -1191,7 +1193,7 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   display: flex;
   align-items: center;
   img {
-    max-width: 150px;
+    max-width: 110px;
   }
 }
 /* SEARCH RESULTS */
@@ -1435,7 +1437,7 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     padding: 0;
   }
   .home_page_content {
-    max-height: 371px;
+    max-height: 386px;
   }
   .newsletter_container {
     padding: 60px 0;
@@ -1489,7 +1491,16 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     flex-direction: column;
     line-height: 1.5rem;
   }
-
+  .award_row {
+    margin-bottom: 40px;
+    img {
+      max-width: 90px;
+    }
+    h3 {
+      margin-top: 10px;
+      text-align: center;
+    }
+  }
 }
 
 @media (max-width: 480px) {
@@ -1577,10 +1588,15 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   .banner_container .banner_image {
     height: 160px;
   }
+  #mobileHome {
+    margin-bottom: 30px;
+  }
   .feature_container .container {
     flex-direction: column;
+    align-items: center;
     .width_30 {
-      width: 100%;
+      margin: 5px 0;
+      width: 50%;
     }
   }
   .home_page_content {
@@ -1608,6 +1624,12 @@ a.jobs_store_name:hover, a.jobs_name:hover {
     align-items: center;
     .directory_btn {
       margin-bottom: 30px;
+      #selectByCatMobile {
+        display: block;
+      }
+    }
+    #alphaSort, #selectByCatDesktop, #centreMap {
+      display: none;
     }
   }
   .stores-grid-item {
@@ -1615,6 +1637,10 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   }
   #store_details {
     padding: 0 10px;
+  }
+  /* MAP */
+  #hideMapBtn {
+    display: none;
   }
   /* HOURS */
   .hours_div {
@@ -1631,10 +1657,6 @@ a.jobs_store_name:hover, a.jobs_name:hover {
   }
   .award_row {
     margin-bottom: 40px;
-    h3 {
-      margin-top: 10px;
-      text-align: center;
-    }
   }
 }
 

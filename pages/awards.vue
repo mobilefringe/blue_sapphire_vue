@@ -4,12 +4,16 @@
     <div class="container margin_30">
       <div class="row">
         <div class="col">
-          <div v-for="(item, index) in awards" :key="index" class="row award_row">
-            <div class="col-md-3 col-lg-2 text-center">
-              <img class="max-width" :src="item.image_url" :alt="item.name" />
-            </div>
-            <div class="col-md-9 col-lg-10">
-              <h3>{{ item.name}}</h3>
+          <div class="row">
+            <div v-for="(item, index) in awards" :key="index" class="col-md-6">
+              <div class="row award_row">
+                <div class="col-md-3 text-center">
+                  <img class="max-width" :src="item.image_url" :alt="item.name" />
+                </div>
+                <div class="col-md-9">
+                  <h3>{{ item.name }}</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>

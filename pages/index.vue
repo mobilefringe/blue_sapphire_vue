@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <div id="mobileHome" class="margin_60"></div>
     <div class="container">
       <div class="row">
         <div v-for="(item, index) in featuredImageOne" :key="index" class="col-md-6 no_padding">

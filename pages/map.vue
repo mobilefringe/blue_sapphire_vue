@@ -7,7 +7,7 @@
           <router-link to="/stores">
             <div class="directory_btn caps">Stores</div>
           </router-link>
-          <div class="directory_btn caps active">Centre Map</div>
+          <div id="hideMapBtn" class="directory_btn caps active">Centre Map</div>
         </div>
       </div>
       <div class="row">
@@ -152,7 +152,9 @@
         }
       },
       updateSVGMap(map) {
+        console.log("map", map)
         this.map = map;
+        // map.moveTo(0.5, 0.5, 0.4);
         // this.dropPin(this.currentStore);
       }
     },
