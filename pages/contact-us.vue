@@ -5,7 +5,7 @@
       <iframe class="margin_30" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2899.32425251166!2d-80.32201808451613!3d43.39115167913113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b883315d65e15%3A0xdd9962d43d55419b!2sCambridge+Centre!5e0!3m2!1sen!2sca!4v1551294536521" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
       <div class="row">
         <div class="col-md-6 order-md-2 order-lg-2 border-left">
-          <h2 class="margin_30">Contact us with your questions, comments, or for more information.</h2>
+          <h2 ref="form-title" class="margin_30">Contact us with your questions, comments, or for more information.</h2>
           <transition name="custom-classes-transition" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
             <div>
               <div id="send_contact_success" class="alert alert-success" role="alert" v-show="formSuccess">
@@ -162,10 +162,7 @@
             .catch(error => {
               vm.formError = true;
             });
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
+            this.scrollTo('form-title');
           }
         })
       },
@@ -178,6 +175,15 @@
           newObj.push(tempVal);
         });
         return newObj;
+      },
+      scrollTo(refName) {
+        var element = this.$refs[refName];
+        var top = element.offsetTop - 1;
+        window.scroll({
+          top: top,
+          left: 0,
+          behavior: 'smooth'
+        });
       }  
     }
   }
