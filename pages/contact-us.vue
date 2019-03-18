@@ -43,14 +43,6 @@
                 <span v-show="errors.has('email')" class="form-control-feedback">{{ errors.first('email') }}</span>
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="form-input col-sm-12" :class="{'has-error': errors.has('subject')}">
-                <label class="" for="subject">Subject *</label>
-                <input id="subject" v-model="form_data.subject" v-validate="'required|alpha_spaces'" class="form-control" :class="{'input': true}" name="subject" data-vv-as="Subject"
-                  type="text" data-vv-delay="1000" placeholder="" required>
-                <span v-show="errors.has('firts_name')" class="form-control-feedback">{{ errors.first('subject') }}</span>
-              </div>
-            </div> -->
             <div class="row">
               <div class="form-input col-sm-12" :class="{'has-error': errors.has('message')}">
                 <label class="" for="message">Message *</label>
@@ -59,7 +51,7 @@
                 <span v-show="errors.has('message')" class="form-control-feedback">{{ errors.first('message') }}</span>
               </div>
             </div>
-            <div class="row">
+            <div class="row margin_30">
               <div class="col-sm-12" :class="{'has-error': errors.has('message')}">
                 <label class="checkbox">
                   <input name="agree_newsletter" v-validate="'required:true'" :class="{'input': true}" type="checkbox" required> <span>I agree to receive electronic communications from <span class="caps">{{ property.name }}</span>.</span>
