@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="animated_btn" v-if="promotions && showMore <= promotions.length" @click="loadMore()">Load More</div>
+          <div class="animated_btn" v-if="promotions && showMore < promotions.length" @click="loadMore()">Load More</div>
           <p v-if="promotions.length === 0">There are no Promotions posted at this time. Please check back soon.</p>
         </div>
       </div>

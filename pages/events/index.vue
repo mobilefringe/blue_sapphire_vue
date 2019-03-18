@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="animated_btn" v-if="events && showMore <= events.length" @click="loadMore()">Load More</div>
+          <div class="animated_btn" v-if="events && showMore < events.length" @click="loadMore()">Load More</div>
           <p v-if="events.length === 0">There are no Events posted at this time. Please check back soon.</p>
         </div>
       </div>
