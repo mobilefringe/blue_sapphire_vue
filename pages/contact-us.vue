@@ -152,7 +152,7 @@
             let send_data = new FormData();
             // send_data.append("mailto", this.property.contact_email);
             send_data.append("mailto", "caitlin@mobilefringe.com");
-            // send_data.append("from_email", this.form_data.email);
+            send_data.append("from_email", this.form_data.email);
             send_data.append("subject", "You've Recieved a Message from " + this.property.name + " Website.");
             send_data.append("custom[First Name]", this.form_data.first_name);
             send_data.append("custom[Last Name]", this.form_data.last_name);
@@ -160,7 +160,7 @@
             send_data.append("custom[Message]", this.form_data.message);
             
             let vm = this;
-            fetch("//www.mallmaverickstaging.com/custom_email.js", {
+            fetch("//www.mallmaverick.com/custom_email.js", {
               method: "post",
               body: send_data
             })
