@@ -12,8 +12,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <mapplic-map v-if="mobileMap" ref="svgmaprefmobile" :height="200" :minimap="false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale="5" :storelist="storeList" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
-          <mapplic-map v-else ref="svgmap_ref" :height="600" :minimap="false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale="5" :storelist="storeList" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
+          <mapplic-map ref="svgmap_ref" :height="500" :minimap="false" :deeplinking="false" :sidebar="false" :hovertip="true" :maxscale="5" :storelist="storeList" :floorlist="floorList" tooltiplabel="View Store Details" @updateMap="updateSVGMap"></mapplic-map>
         </div>
       </div>
       <div class="margin_30"></div>
@@ -59,7 +58,7 @@
         currentSEO: {},
         page_name: "Centre Map",
         windowWidth: 0,
-        mobileMap: false,
+        map: null,
       };
     },
     async asyncData({ store, params, route }) {
@@ -72,15 +71,15 @@
         console.log(e.message);  
       }
     },
-    watch: {
-			windowWidth: function() {
-				if (this.windowWidth <= 768) {
-					this.mobileMap = true;
-				} else {
-					this.mobileMap = false;
-        }
-      }
-    },
+    // watch: {
+		// 	windowWidth: function() {
+		// 		if (this.windowWidth <= 768) {
+		// 			this.mobileMap = true;
+		// 		} else {
+		// 			this.mobileMap = false;
+    //     }
+    //   }
+    // },
     mounted() {
       this.getWindowWidth();
       this.getSVGMap;
@@ -98,15 +97,6 @@
             value.svgmap_region = value.id;
           }
         });
-        // Set initial zoom
-        // var initZoom = {};
-        // initZoom.svgmap_region = "init";
-        // initZoom.z_coordinate = 1;
-        // initZoom.x = 0.5;
-        // initZoom.y = 0.5;
-        // initZoom.zoom = 1;
-        // all_stores.push(initZoom)
-
         return all_stores;
       },
       getSVGMap(){
@@ -117,11 +107,8 @@
       },
       svgMapRef() {
         var reference = null;
-        if (this.windowWidth <= 768) {
-          reference = this.$refs.svgmaprefmobile;
-        } else {
-          reference = this.$refs.svgmap_ref;
-        }
+        reference = this.$refs.svgmap_ref;
+
         return reference;
       },
       floorList () {
@@ -139,23 +126,18 @@
     },
     methods: {
       getWindowWidth(event) {
-				this.windowWidth = window.innerWidth;
+        this.windowWidth = window.innerWidth;
 			},
-      // dropPin(store) {
-      //   this.$refs.mapplic_ref.showLocation(store.svgmap_region);
-      // },
       dropPin(store) {
-        if (this.windowWidth <= 768 && this.selectedStore) {
-          this.svgMapRef.showLocation(store.svgmap_region);
-        } else if (this.windowWidth > 768) {
-          this.svgMapRef.showLocation(store.svgmap_region);
-        }
+        this.svgMapRef.showLocation(store.svgmap_region);
       },
       updateSVGMap(map) {
-        console.log("map", map)
         this.map = map;
-        // map.moveTo(0.5, 0.5, 0.4);
-        // this.dropPin(this.currentStore);
+        if (this.windowWidth <= 768) {
+          map.moveTo(0.5, 0.5, 0.9);
+        } else {
+          map.moveTo(0.5, 0.5, 1.3);
+        }
       }
     },
     beforeMount () {

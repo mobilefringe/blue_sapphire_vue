@@ -2,24 +2,24 @@
   <div>
     <inside-page-banner :page_name="page_name" />
     <div class="container margin_30">
+      <transition name="custom-classes-transition" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
+        <div>
+          <div id="send_contact_success" class="alert alert-success" role="alert" v-show="formSuccess">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Success</span>
+            Thank you. A member from our team will reply to you shortly.
+          </div>
+          <div id="send_contact_error" class="alert alert-danger" role="alert" v-show="formError">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            An error occurred when submitting your message. Please try again later.
+          </div>   
+        </div>
+      </transition> 
       <iframe class="margin_30" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2899.32425251166!2d-80.32201808451613!3d43.39115167913113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b883315d65e15%3A0xdd9962d43d55419b!2sCambridge+Centre!5e0!3m2!1sen!2sca!4v1551294536521" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
       <div class="row">
         <div class="col-md-6 order-md-2 order-lg-2 border-left">
-          <h2 ref="form-title" class="margin_30">Contact us with your questions, comments, or for more information.</h2>
-          <transition name="custom-classes-transition" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-            <div>
-              <div id="send_contact_success" class="alert alert-success" role="alert" v-show="formSuccess">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                <span class="sr-only">Success</span>
-                Thank you. A member from our team will reply to you shortly.
-              </div>
-              <div id="send_contact_error" class="alert alert-danger" role="alert" v-show="formError">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span>
-                An error occurred when submitting your message. Please try again later.
-              </div>   
-            </div>
-          </transition> 
+          <h2 class="margin_30">Contact us with your questions, comments, or for more information.</h2>
           <form id="contact-us-form" class="form-horizontal" action="form-submit" v-on:submit.prevent="validateBeforeSubmit">
             <div class="row">
               <div class="form-input col-lg-6 col-md-12" :class="{'has-error': errors.has('first_name')}">
@@ -162,7 +162,10 @@
             .catch(error => {
               vm.formError = true;
             });
-            this.scrollTo('form-title');
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
           }
         })
       },
@@ -175,15 +178,6 @@
           newObj.push(tempVal);
         });
         return newObj;
-      },
-      scrollTo(refName) {
-        var element = this.$refs[refName];
-        var top = element.offsetTop - 1;
-        window.scroll({
-          top: top,
-          left: 0,
-          behavior: 'smooth'
-        });
       }  
     }
   }

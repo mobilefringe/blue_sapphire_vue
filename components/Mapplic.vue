@@ -242,7 +242,7 @@
         this.self = location;
 
         this.mapLoaded();
-        this.$emit('updateMap');
+        this.$emit('updateMap',this.self);
       },
       locationopened(e, loc) {
         if (loc) {
@@ -267,6 +267,7 @@
         this.self.switchLevel(target);
       },
       moveTo(x, y, s, d) {
+        console.log("hi")
         this.self.moveTo(x, y, s, d);
       },
       getLocationData(id) {
